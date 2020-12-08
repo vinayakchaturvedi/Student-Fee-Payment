@@ -1,6 +1,7 @@
 package com.example.studentfeepayment.bean;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,6 +16,10 @@ public class Students {
     @Column(nullable = false)
     private String firstName;
     private String lastName;
+    @Column(nullable = false)
+    private String userName;
+    @Column(nullable = false)
+    private String password;
     @Column(nullable = false, unique = true)
     private String email;
     private String photographPath;
@@ -40,16 +45,19 @@ public class Students {
     }
 
     public Students(final int rollNumber, final String firstName, final String lastName,
-                    final String email, final String photographPath, final double cgpa,
-                    final int totalCredits, final int graduationYear) {
+                    final String password, final String email, final String photographPath,
+                    final double cgpa, final int totalCredits, final int graduationYear) {
         this.rollNumber = rollNumber;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userName = firstName + rollNumber;
+        this.password = password;
         this.email = email;
         this.photographPath = photographPath;
         this.cgpa = cgpa;
         this.totalCredits = totalCredits;
         this.graduationYear = graduationYear;
+        this.bills = new ArrayList<>();
     }
 
     public int getStudentId() {
@@ -82,6 +90,22 @@ public class Students {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -122,5 +146,13 @@ public class Students {
 
     public void setGraduationYear(int graduationYear) {
         this.graduationYear = graduationYear;
+    }
+
+    public List<Bills> getBills() {
+        return bills;
+    }
+
+    public void setBills(List<Bills> bills) {
+        this.bills = bills;
     }
 }

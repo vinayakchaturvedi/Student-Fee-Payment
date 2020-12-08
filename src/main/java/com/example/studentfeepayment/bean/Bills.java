@@ -2,6 +2,7 @@ package com.example.studentfeepayment.bean;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,6 +28,7 @@ public class Bills {
         this.description = description;
         this.dateTime = dateTime;
         this.deadline = deadline;
+        this.students = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -51,5 +53,21 @@ public class Bills {
 
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Students> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Students> students) {
+        this.students = students;
     }
 }
