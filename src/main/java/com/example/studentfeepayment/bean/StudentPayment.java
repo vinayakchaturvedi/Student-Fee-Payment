@@ -9,9 +9,9 @@ public class StudentPayment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;                                 //Primary Key
-    private int studentId;                          //Foreign Key
-    private int billId;                             //Foreign Key
+    private Integer id;                                 //Primary Key
+    private Integer studentId;                          //Foreign Key
+    private Integer billId;                             //Foreign Key
     private String description;
     @Column(nullable = false)
     private long amount;
@@ -21,19 +21,19 @@ public class StudentPayment {
     public StudentPayment() {
     }
 
-    public int getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
 
-    public int getBillId() {
+    public Integer getBillId() {
         return billId;
     }
 
-    public void setBillId(int billId) {
+    public void setBillId(Integer billId) {
         this.billId = billId;
     }
 

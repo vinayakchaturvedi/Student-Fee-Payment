@@ -10,9 +10,9 @@ public class Students {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int studentId;              //Primary Key
+    private Integer studentId;              //Primary Key
     @Column(nullable = false, unique = true)
-    private int rollNumber;
+    private Integer rollNumber;
     @Column(nullable = false)
     private String firstName;
     private String lastName;
@@ -26,8 +26,8 @@ public class Students {
     @Column(nullable = false)
     private double cgpa;
     @Column(nullable = false)
-    private int totalCredits;
-    private int graduationYear;
+    private Integer totalCredits;
+    private Integer graduationYear;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "StudentBills", joinColumns = {@JoinColumn(name = "studentId")},
             inverseJoinColumns = {@JoinColumn(name = "billId")})
@@ -38,15 +38,15 @@ public class Students {
      * <p>
      * private String domain;
      * private String specialization;
-     * private int placementId;
+     * private Integer placementId;
      */
 
     public Students() {
     }
 
-    public Students(final int rollNumber, final String firstName, final String lastName,
+    public Students(final Integer rollNumber, final String firstName, final String lastName,
                     final String password, final String email, final String photographPath,
-                    final double cgpa, final int totalCredits, final int graduationYear) {
+                    final double cgpa, final Integer totalCredits, final Integer graduationYear) {
         this.rollNumber = rollNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,19 +60,19 @@ public class Students {
         this.bills = new ArrayList<>();
     }
 
-    public int getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Integer studentId) {
         this.studentId = studentId;
     }
 
-    public int getRollNumber() {
+    public Integer getRollNumber() {
         return rollNumber;
     }
 
-    public void setRollNumber(int rollNumber) {
+    public void setRollNumber(Integer rollNumber) {
         this.rollNumber = rollNumber;
     }
 
@@ -96,8 +96,8 @@ public class Students {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void generateUserName() {
+        this.userName = this.firstName + this.rollNumber;
     }
 
     public String getPassword() {
@@ -132,19 +132,19 @@ public class Students {
         this.cgpa = cgpa;
     }
 
-    public int getTotalCredits() {
+    public Integer getTotalCredits() {
         return totalCredits;
     }
 
-    public void setTotalCredits(int totalCredits) {
+    public void setTotalCredits(Integer totalCredits) {
         this.totalCredits = totalCredits;
     }
 
-    public int getGraduationYear() {
+    public Integer getGraduationYear() {
         return graduationYear;
     }
 
-    public void setGraduationYear(int graduationYear) {
+    public void setGraduationYear(Integer graduationYear) {
         this.graduationYear = graduationYear;
     }
 

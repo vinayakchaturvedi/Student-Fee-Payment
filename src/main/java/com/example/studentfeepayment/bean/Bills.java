@@ -11,14 +11,14 @@ public class Bills {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;                                         //Primary Key
+    private Integer id;                                         //Primary Key
     private String description;
     @Column(nullable = false)
     private LocalDateTime dateTime;
     @Column(nullable = false)
     private LocalDateTime deadline;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "Bills")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bills")
     private List<Students> students;
 
     public Bills() {
@@ -55,11 +55,11 @@ public class Bills {
         this.deadline = deadline;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
