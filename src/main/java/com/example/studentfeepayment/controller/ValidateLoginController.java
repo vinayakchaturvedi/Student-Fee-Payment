@@ -1,6 +1,7 @@
 package com.example.studentfeepayment.controller;
 
 import com.example.studentfeepayment.bean.Students;
+import com.example.studentfeepayment.utils.GetInstances;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -15,11 +16,11 @@ public class ValidateLoginController {
 
     @POST
     @Path("/validate")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response validateLogin(Students students) throws URISyntaxException {
-        System.out.println(students.getUserName());
-        System.out.println(students.getPassword());
-        return Response.ok().build();
+    public Response validateLogin(Students student) throws URISyntaxException {
+        Students response = GetInstances.getInstanceOfStudentOperationService().validateStudentLogin(student);
+        if (response == null) return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok().entity(student).build();
     }
 }

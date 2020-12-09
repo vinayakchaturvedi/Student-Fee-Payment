@@ -17,9 +17,14 @@ login_form.addEventListener('submit', async (e) => {
         });
         let result = await response;
         console.log(result);
+        let myStatus = response.status;
+        if (myStatus === 404) {
+            document.getElementById("incorrectUser").innerHTML = "Incorrect User Name/Password !!!";
+        } else {
+            login_form.classList.add('was-validated');
+            window.location.href = "Bills.html";
+        }
     }
-    login_form.classList.add('was-validated');
-    window.location.href = "Bills.html";
 });
 
 

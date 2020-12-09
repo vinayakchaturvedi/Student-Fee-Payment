@@ -155,4 +155,22 @@ public class Students {
     public void setBills(List<Bills> bills) {
         this.bills = bills;
     }
+
+    @Override
+    public String toString() {
+        return "Students{" +
+                "studentId=" + studentId +
+                ", rollNumber=" + rollNumber +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", photographPath='" + photographPath + '\'' +
+                ", cgpa=" + cgpa +
+                ", totalCredits=" + totalCredits +
+                ", graduationYear=" + graduationYear +
+                ", bills=" + bills +
+                '}';
+    }
 }

@@ -1,23 +1,23 @@
 package com.example.studentfeepayment.utils;
 
-import com.example.studentfeepayment.dao.RegisterStudentInDB;
-import com.example.studentfeepayment.service.RegisterStudent;
+import com.example.studentfeepayment.dao.StudentOperationsDAO;
+import com.example.studentfeepayment.service.StudentOperationsService;
 
 public class GetInstances {
-    private static RegisterStudent registerStudent;
-    private static RegisterStudentInDB registerStudentInDB;
+    private static StudentOperationsService studentOperationsService;
+    private static StudentOperationsDAO studentOperationsDAO;
 
-    public static RegisterStudentInDB getInstanceOfRegisterStudentInDB() {
-        if (registerStudentInDB != null) return registerStudentInDB;
+    public static StudentOperationsDAO getInstanceOfStudentOperationDAO() {
+        if (studentOperationsDAO != null) return studentOperationsDAO;
 
-        registerStudentInDB = new RegisterStudentInDB();
-        return registerStudentInDB;
+        studentOperationsDAO = new StudentOperationsDAO();
+        return studentOperationsDAO;
     }
 
-    public static RegisterStudent getInstanceOfRegisterStudent() {
-        if (registerStudent != null) return registerStudent;
+    public static StudentOperationsService getInstanceOfStudentOperationService() {
+        if (studentOperationsService != null) return studentOperationsService;
 
-        registerStudent = new RegisterStudent();
-        return registerStudent;
+        studentOperationsService = new StudentOperationsService();
+        return studentOperationsService;
     }
 }
