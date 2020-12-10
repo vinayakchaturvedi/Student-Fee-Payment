@@ -22,7 +22,11 @@ login_form.addEventListener('submit', async (e) => {
             document.getElementById("incorrectUser").innerHTML = "Incorrect User Name/Password !!!";
         } else {
             login_form.classList.add('was-validated');
+
+            let student = response.json();
+            console.log(student);
             window.location.href = "Bills.html";
+            //document.getElementById("incorrectUser").innerHTML = JSON.stringify(student, undefined, 4);
         }
     }
 });

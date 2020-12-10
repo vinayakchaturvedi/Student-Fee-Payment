@@ -1,7 +1,7 @@
 package com.example.studentfeepayment.bean;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +14,10 @@ public class Bills {
     private Integer id;                                         //Primary Key
     private String description;
     @Column(nullable = false)
-    private LocalDateTime dateTime;
+    private Integer amount;
     @Column(nullable = false)
-    private LocalDateTime deadline;
+    private LocalDate billDate;
+    private LocalDate deadline;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bills")
     private List<Students> students;
@@ -24,9 +25,10 @@ public class Bills {
     public Bills() {
     }
 
-    public Bills(String description, LocalDateTime dateTime, LocalDateTime deadline) {
+    public Bills(String description, Integer amount, LocalDate billDate, LocalDate deadline) {
         this.description = description;
-        this.dateTime = dateTime;
+        this.amount = amount;
+        this.billDate = billDate;
         this.deadline = deadline;
         this.students = new ArrayList<>();
     }
@@ -39,19 +41,19 @@ public class Bills {
         this.description = description;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getBillDate() {
+        return billDate;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setBillDate(LocalDate dateTime) {
+        this.billDate = dateTime;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
@@ -69,5 +71,24 @@ public class Bills {
 
     public void setStudents(List<Students> students) {
         this.students = students;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return "Bills{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", billDate=" + billDate +
+                ", deadline=" + deadline +
+                '}';
     }
 }

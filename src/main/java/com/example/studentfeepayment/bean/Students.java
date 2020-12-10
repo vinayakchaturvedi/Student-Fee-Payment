@@ -12,7 +12,7 @@ public class Students {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer studentId;              //Primary Key
     @Column(nullable = false, unique = true)
-    private Integer rollNumber;
+    private String rollNumber;
     @Column(nullable = false)
     private String firstName;
     private String lastName;
@@ -44,7 +44,7 @@ public class Students {
     public Students() {
     }
 
-    public Students(final Integer rollNumber, final String firstName, final String lastName,
+    public Students(final String rollNumber, final String firstName, final String lastName,
                     final String password, final String email, final String photographPath,
                     final double cgpa, final Integer totalCredits, final Integer graduationYear) {
         this.rollNumber = rollNumber;
@@ -68,11 +68,11 @@ public class Students {
         this.studentId = studentId;
     }
 
-    public Integer getRollNumber() {
+    public String getRollNumber() {
         return rollNumber;
     }
 
-    public void setRollNumber(Integer rollNumber) {
+    public void setRollNumber(String rollNumber) {
         this.rollNumber = rollNumber;
     }
 
@@ -96,8 +96,8 @@ public class Students {
         return userName;
     }
 
-    public void generateUserName() {
-        this.userName = this.firstName + this.rollNumber;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -170,7 +170,16 @@ public class Students {
                 ", cgpa=" + cgpa +
                 ", totalCredits=" + totalCredits +
                 ", graduationYear=" + graduationYear +
-                ", bills=" + bills +
+                ", bills=" + printBills(bills) +
                 '}';
+    }
+
+    private String printBills(List<Bills> bills) {
+        StringBuilder billsToString = new StringBuilder();
+        for (Bills bill : bills) {
+            billsToString.append(bill.toString()).append("\n");
+        }
+
+        return billsToString.toString();
     }
 }

@@ -21,6 +21,8 @@ public class ValidateLoginController {
     public Response validateLogin(Students student) throws URISyntaxException {
         Students response = GetInstances.getInstanceOfStudentOperationService().validateStudentLogin(student);
         if (response == null) return Response.status(Response.Status.NOT_FOUND).build();
-        return Response.ok().entity(student).build();
+
+        System.out.println("Retrieved student: " + response.toString());
+        return Response.ok().entity(response).build();
     }
 }

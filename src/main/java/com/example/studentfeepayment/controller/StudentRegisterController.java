@@ -18,9 +18,9 @@ public class StudentRegisterController {
     @Path("/student")
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response validateLogin(Students student) throws URISyntaxException {
-        System.out.println("Response from service and DAO: " +
-                GetInstances.getInstanceOfStudentOperationService().registerStudent(student));
+    public Response registerStudent(Students student) throws URISyntaxException {
+        System.out.println("Response from service and DAO for registering a new student: " +
+                GetInstances.getInstanceOfStudentOperationService().registerStudent(student).toString());
 
         return Response.ok().build();
     }
