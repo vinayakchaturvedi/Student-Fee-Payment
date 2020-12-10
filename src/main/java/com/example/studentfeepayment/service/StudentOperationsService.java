@@ -22,7 +22,7 @@ public class StudentOperationsService {
         String rollNumber = String.valueOf(++latestRollNumber);
         if (rollNumber.length() == 1) rollNumber = "00" + rollNumber;
         else if (rollNumber.length() == 2) rollNumber = "0" + rollNumber;
-        rollNumber = "MT2020" + rollNumber;
+        rollNumber = Constants.ROLL_NUMBER_PREFIX + rollNumber;
 
         student.setRollNumber(rollNumber);
         student.setUserName(rollNumber);
@@ -42,22 +42,22 @@ public class StudentOperationsService {
         LocalDateTime today = LocalDateTime.now();
 
         Bills registration = new Bills(Constants.REGISTRATION_FEE, Constants.REGISTRATION_FEE_VALUE,
-                today, today.plusDays(4));
+                Constants.ZERO, Constants.REGISTRATION_FEE_VALUE, today, today.plusDays(4));
 
         Bills library = new Bills(Constants.LIBRARY_FEE, Constants.LIBRARY_FEE_VALUE,
-                today, today.plusDays(4));
+                Constants.ZERO, Constants.LIBRARY_FEE_VALUE, today, today.plusDays(4));
 
         Bills tuition = new Bills(Constants.TUITION_FEE, Constants.TUITION_FEE_VALUE,
-                today, today.plusDays(4));
+                Constants.ZERO, Constants.TUITION_FEE_VALUE, today, today.plusDays(4));
 
         Bills exam = new Bills(Constants.EXAM_FEE, Constants.EXAM_FEE_VALUE,
-                today, today.plusDays(4));
+                Constants.ZERO, Constants.EXAM_FEE_VALUE, today, today.plusDays(4));
 
         Bills hostel = new Bills(Constants.HOSTEL_FEE, Constants.HOSTEL_FEE_VALUE,
-                today, today.plusDays(4));
+                Constants.ZERO, Constants.HOSTEL_FEE_VALUE, today, today.plusDays(4));
 
         Bills mess = new Bills(Constants.MESS_FEE, Constants.MESS_FEE_VALUE,
-                today, today.plusDays(4));
+                Constants.ZERO, Constants.MESS_FEE_VALUE, today, today.plusDays(4));
 
         bills.add(registration);
         bills.add(library);

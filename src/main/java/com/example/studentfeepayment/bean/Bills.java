@@ -14,7 +14,11 @@ public class Bills {
     private Integer id;                                         //Primary Key
     private String description;
     @Column(nullable = false)
-    private Integer amount;
+    private Integer totalAmount;
+    @Column(nullable = false)
+    private Integer paidAmount;
+    @Column(nullable = false)
+    private Integer remainingAmount;
     @Column(nullable = false)
     private LocalDateTime billDate;
     private LocalDateTime deadline;
@@ -25,9 +29,11 @@ public class Bills {
     public Bills() {
     }
 
-    public Bills(String description, Integer amount, LocalDateTime billDate, LocalDateTime deadline) {
+    public Bills(String description, Integer totalAmount, Integer paidAmount, Integer remainingAmount, LocalDateTime billDate, LocalDateTime deadline) {
         this.description = description;
-        this.amount = amount;
+        this.totalAmount = totalAmount;
+        this.paidAmount = paidAmount;
+        this.remainingAmount = remainingAmount;
         this.billDate = billDate;
         this.deadline = deadline;
         this.students = new ArrayList<>();
@@ -73,12 +79,28 @@ public class Bills {
         this.students = students;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setTotalAmount(Integer amount) {
+        this.totalAmount = amount;
+    }
+
+    public Integer getPaidAmount() {
+        return paidAmount;
+    }
+
+    public void setPaidAmount(Integer paidAmount) {
+        this.paidAmount = paidAmount;
+    }
+
+    public Integer getRemainingAmount() {
+        return remainingAmount;
+    }
+
+    public void setRemainingAmount(Integer remainingAmount) {
+        this.remainingAmount = remainingAmount;
     }
 
     @Override
@@ -86,7 +108,9 @@ public class Bills {
         return "Bills{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", amount=" + amount +
+                ", totalAmount=" + totalAmount +
+                ", paidAmount=" + paidAmount +
+                ", remainingAmount=" + remainingAmount +
                 ", billDate=" + billDate +
                 ", deadline=" + deadline +
                 '}';

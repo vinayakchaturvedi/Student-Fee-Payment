@@ -19,4 +19,7 @@ public class Constants {
     public static String MESS_FEE = "Mess Fees";
     public static int MESS_FEE_VALUE = 50000;
 
+    public static int ZERO = 0;
+    public static String ROLL_NUMBER_PREFIX = "MT2020";
+
 }
