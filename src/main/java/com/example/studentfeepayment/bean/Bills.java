@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Bills")
-public class Bills {
+public class Bills implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,7 +76,8 @@ public class Bills {
     }
 
     public void setStudents(List<Students> students) {
-        this.students = students;
+        this.students = new ArrayList<>(students);
+        ;
     }
 
     public Integer getTotalAmount() {
@@ -114,5 +115,15 @@ public class Bills {
                 ", billDate=" + billDate +
                 ", deadline=" + deadline +
                 '}';
+    }
+
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Bills shallowCopy() throws CloneNotSupportedException {
+        Bills clonedBill = (Bills) this.clone();
+        clonedBill.students = new ArrayList<>();
+        return clonedBill;
     }
 }

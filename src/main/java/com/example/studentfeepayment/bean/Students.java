@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Students")
-public class Students {
+public class Students implements Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,20 +44,22 @@ public class Students {
     public Students() {
     }
 
-    public Students(final String rollNumber, final String firstName, final String lastName,
-                    final String password, final String email, final String photographPath,
-                    final double cgpa, final Integer totalCredits, final Integer graduationYear) {
+    public Students(Integer studentId, String rollNumber, String firstName,
+                    String lastName, String userName, String password,
+                    String email, String photographPath, double cgpa, Integer totalCredits,
+                    Integer graduationYear, List<Bills> bills) {
+        this.studentId = studentId;
         this.rollNumber = rollNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userName = firstName + rollNumber;
+        this.userName = userName;
         this.password = password;
         this.email = email;
         this.photographPath = photographPath;
         this.cgpa = cgpa;
         this.totalCredits = totalCredits;
         this.graduationYear = graduationYear;
-        this.bills = new ArrayList<>();
+        this.bills = bills;
     }
 
     public Integer getStudentId() {
@@ -153,7 +155,7 @@ public class Students {
     }
 
     public void setBills(List<Bills> bills) {
-        this.bills = bills;
+        this.bills = new ArrayList<>(bills);
     }
 
     @Override
@@ -175,11 +177,25 @@ public class Students {
     }
 
     private String printBills(List<Bills> bills) {
+        if (bills == null || bills.isEmpty()) return "no Bills";
         StringBuilder billsToString = new StringBuilder();
         for (Bills bill : bills) {
             billsToString.append(bill.toString()).append("\n");
         }
 
         return billsToString.toString();
+    }
+
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Students shallowCopy() throws CloneNotSupportedException{
+        Students clonedStudent = (Students) this.clone();
+        clonedStudent.bills = new ArrayList<>();
+        for (Bills bill : this.bills) {
+            clonedStudent.bills.add(bill.shallowCopy());
+        }
+        return clonedStudent;
     }
 }

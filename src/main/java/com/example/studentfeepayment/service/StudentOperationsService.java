@@ -2,8 +2,8 @@ package com.example.studentfeepayment.service;
 
 import com.example.studentfeepayment.bean.Bills;
 import com.example.studentfeepayment.bean.Students;
+import com.example.studentfeepayment.dao.StudentOperationsDAO;
 import com.example.studentfeepayment.utils.Constants;
-import com.example.studentfeepayment.utils.GetInstances;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,7 +14,8 @@ public class StudentOperationsService {
     public static Integer latestRollNumber;
 
     public StudentOperationsService() {
-        latestRollNumber = GetInstances.getInstanceOfStudentOperationDAO().getMaxId();
+        StudentOperationsDAO sopDAO = new StudentOperationsDAO();
+        latestRollNumber = sopDAO.getMaxId();
     }
 
     public Students registerStudent(final Students student) {
@@ -31,7 +32,9 @@ public class StudentOperationsService {
         student.setTotalCredits(16);
 
         student.setBills(generateBills());
-        GetInstances.getInstanceOfStudentOperationDAO().registerStudent(student);
+
+        StudentOperationsDAO sopDAO = new StudentOperationsDAO();
+        sopDAO.registerStudent(student);
 
         return student;
     }
@@ -71,6 +74,8 @@ public class StudentOperationsService {
 
     public Students validateStudentLogin(final Students student) {
         if (student.getUserName().isEmpty() || student.getPassword().isEmpty()) return null;
-        return GetInstances.getInstanceOfStudentOperationDAO().validateStudentLogin(student);
+        StudentOperationsDAO sopDAO = new StudentOperationsDAO();
+        Students response = sopDAO.validateStudentLogin(student);
+        return response;
     }
 }

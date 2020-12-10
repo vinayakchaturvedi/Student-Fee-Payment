@@ -3,10 +3,8 @@ package com.example.studentfeepayment.dao;
 import com.example.studentfeepayment.bean.Bills;
 import com.example.studentfeepayment.bean.Students;
 import com.example.studentfeepayment.utils.SessionUtil;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -52,9 +50,10 @@ public class StudentOperationsDAO {
 
             Query<Students> query = session.createQuery(criteriaQuery);
             List<Students> students = query.getResultList();
-            session.close();
 
-            return students.isEmpty() ? null : students.get(0);
+            Students response = students.isEmpty() ? null : students.get(0).shallowCopy();
+            session.close();
+            return response;
 
         } catch (Exception ex) {
             session.close();
