@@ -5,7 +5,7 @@ import com.example.studentfeepayment.bean.Students;
 import com.example.studentfeepayment.utils.Constants;
 import com.example.studentfeepayment.utils.GetInstances;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class StudentOperationsService {
     private List<Bills> generateBills() {
 
         List<Bills> bills = new ArrayList<>();
-        LocalDate today = LocalDate.now();
+        LocalDateTime today = LocalDateTime.now();
 
         Bills registration = new Bills(Constants.REGISTRATION_FEE, Constants.REGISTRATION_FEE_VALUE,
                 today, today.plusDays(4));

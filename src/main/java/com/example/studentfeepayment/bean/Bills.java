@@ -1,7 +1,7 @@
 package com.example.studentfeepayment.bean;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +16,8 @@ public class Bills {
     @Column(nullable = false)
     private Integer amount;
     @Column(nullable = false)
-    private LocalDate billDate;
-    private LocalDate deadline;
+    private LocalDateTime billDate;
+    private LocalDateTime deadline;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bills")
     private List<Students> students;
@@ -25,7 +25,7 @@ public class Bills {
     public Bills() {
     }
 
-    public Bills(String description, Integer amount, LocalDate billDate, LocalDate deadline) {
+    public Bills(String description, Integer amount, LocalDateTime billDate, LocalDateTime deadline) {
         this.description = description;
         this.amount = amount;
         this.billDate = billDate;
@@ -41,19 +41,19 @@ public class Bills {
         this.description = description;
     }
 
-    public LocalDate getBillDate() {
+    public LocalDateTime getBillDate() {
         return billDate;
     }
 
-    public void setBillDate(LocalDate dateTime) {
+    public void setBillDate(LocalDateTime dateTime) {
         this.billDate = dateTime;
     }
 
-    public LocalDate getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

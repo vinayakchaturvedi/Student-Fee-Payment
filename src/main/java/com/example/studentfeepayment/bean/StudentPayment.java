@@ -1,7 +1,7 @@
 package com.example.studentfeepayment.bean;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "StudentPayment")
@@ -16,7 +16,7 @@ public class StudentPayment {
     @Column(nullable = false)
     private long amount;
     @Column(nullable = false)
-    private LocalDate paymentDate;
+    private LocalDateTime paymentDate;
 
     public StudentPayment() {
     }
@@ -53,11 +53,11 @@ public class StudentPayment {
         this.amount = amount;
     }
 
-    public LocalDate getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 }
