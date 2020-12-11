@@ -1,5 +1,5 @@
 let login_form = document.getElementById('login-validation');
-//window.onload = printWelcomeMessage;
+let student = null;
 
 login_form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -12,23 +12,18 @@ login_form.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify({
                 userName: document.getElementById('userName').value,
-                password: document.getElementById('password').value,
+                password: document.getElementById('password').value
             })
         });
-        let result = await response;
-        console.log(result);
+        student = await response.json();
+        console.log(student);
         let myStatus = response.status;
         if (myStatus === 404) {
             document.getElementById("incorrectUser").innerHTML = "Incorrect User Name/Password !!!";
         } else {
             login_form.classList.add('was-validated');
-
-            let student = response.json();
-            console.log(student);
-            window.location.href = "Bills.html";
-            //document.getElementById("incorrectUser").innerHTML = JSON.stringify(student, undefined, 4);
+            let queryString = "?userName=" + student.userName + "&name=" + student.firstName;
+            window.location.href = "Bills.html" + queryString;
         }
     }
 });
-
-

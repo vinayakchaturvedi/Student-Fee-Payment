@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="assets/css/bills.css">
 </head>
 <body>
-<h1>Welcome To IIIT Bangalore</h1>
+<h1 id = "welcomeMessage">Welcome To IIIT Bangalore</h1>
 <h2>Following are the bills related to your account</h2>
 
-<table class="container">
+<table class="container" id="show-bills">
     <thead>
     <tr>
         <th><h1>Description</h1></th>
@@ -23,19 +23,9 @@
         <th><h1>Pay Now</h1></th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-        <td>Google</td>
-        <td>9518</td>
-        <td>6369</td>
-        <td>6369</td>
-        <td>6369</td>
-        <td>01:32:50</td>
-        <td>01:32:50</td>
-    </tr>
+    <tbody id="bills">
     </tbody>
 </table>
-<p class="login-card-incorrect-up" id = "studentMessage"></p>
 </body>
-<script src="assets/js/form-validation.js"></script>
+<script src="assets/js/show-bills.js"></script>
 </html>
