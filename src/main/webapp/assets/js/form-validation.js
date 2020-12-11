@@ -15,12 +15,12 @@ login_form.addEventListener('submit', async (e) => {
                 password: document.getElementById('password').value
             })
         });
-        student = await response.json();
-        console.log(student);
         let myStatus = response.status;
         if (myStatus === 404) {
             document.getElementById("incorrectUser").innerHTML = "Incorrect User Name/Password !!!";
         } else {
+            student = await response.json();
+            console.log(student);
             login_form.classList.add('was-validated');
             let queryString = "?userName=" + student.userName + "&name=" + student.firstName;
             window.location.href = "Bills.html" + queryString;
