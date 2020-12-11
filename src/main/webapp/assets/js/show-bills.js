@@ -39,6 +39,7 @@ async function start() {
             temp += '<td>' + billsList[i].paidAmount + '</td>';
             temp += '<td>' + billsList[i].remainingAmount + '</td>';
             temp += '<td>' + billsList[i].remainingAmount + '</td>';
+            temp += '<td><input class=\'myclass\' type=\'button\' value=\'Pay Now\'/></td>'
             tableBody.innerHTML += temp + '</tr>';
         }
     }

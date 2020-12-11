@@ -2,6 +2,8 @@ package com.example.studentfeepayment.controller;
 
 import com.example.studentfeepayment.bean.Students;
 import com.example.studentfeepayment.utils.GetInstances;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -16,13 +18,16 @@ public class StudentRegisterController {
 
     @POST
     @Path("/student")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response registerStudent(Students student) throws URISyntaxException {
-        System.out.println("Response from service and DAO for registering a new student: " +
-                GetInstances.getInstanceOfStudentOperationService().registerStudent(student).toString());
+    public Response registerStudent(Students request) throws URISyntaxException, JsonProcessingException {
+        Students response = GetInstances.getInstanceOfStudentOperationService().registerStudent(request);
+        System.out.println("Response from service and DAO for registering a new student: " + response.toString());
 
-        return Response.ok().build();
+        ObjectMapper mapper = new ObjectMapper();
+        String studentAsJsonMessage = mapper.writeValueAsString(response);
+        System.out.println("Json Message: " + studentAsJsonMessage);
+        return Response.ok().entity(studentAsJsonMessage).build();
     }
 
 }

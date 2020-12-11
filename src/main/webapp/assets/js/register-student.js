@@ -1,10 +1,10 @@
-let login_form = document.getElementById('register-student');
-//window.onload = printWelcomeMessage;
+let register_form = document.getElementById('register-student');
+let student = null;
 
-login_form.addEventListener('submit', async (e) => {
+register_form.addEventListener('submit', async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (login_form.checkValidity() === true) {
+    if (register_form.checkValidity() === true) {
         let response = await fetch('api/register/student', {
             method: 'POST',
             headers: {
@@ -18,11 +18,11 @@ login_form.addEventListener('submit', async (e) => {
                 graduationYear: document.getElementById('graduationYear').value,
             })
         });
-        let result = await response;
-        console.log(result);
+        student = await response.json();
+        console.log(student);
+        let myStatus = response.status;
+        register_form.classList.add('was-validated');
+        let queryString = "?userName=" + student.userName + "&name=" + student.firstName;
+        window.location.href = "Bills.html" + queryString;
     }
-    login_form.classList.add('was-validated');
-    window.location.href = "Bills.html";
 });
-
-
