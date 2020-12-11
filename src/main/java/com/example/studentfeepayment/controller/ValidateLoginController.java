@@ -20,8 +20,8 @@ public class ValidateLoginController {
     @Path("/validate")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response validateLogin(Students student) throws URISyntaxException, JsonProcessingException {
-        Students response = GetInstances.getInstanceOfStudentOperationService().validateStudentLogin(student);
+    public Response validateLogin(Students request) throws URISyntaxException, JsonProcessingException {
+        Students response = GetInstances.getInstanceOfStudentOperationService().validateStudentLogin(request);
         if (response == null) return Response.status(Response.Status.NOT_FOUND).build();
 
         System.out.println("Retrieved student: " + response.toString());

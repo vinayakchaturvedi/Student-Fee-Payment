@@ -1,38 +1,45 @@
-let bill_show = document.getElementById('show-bills');
 let queryString = decodeURIComponent(window.location.search).substring(1);
-let queries = queryString.split('&');
-let userName = queries[0].substring(10);
-let firstName = queries[1].substring(6);
-console.log(firstName + " " + userName);
+let promiseResponse = start();
 
-document.getElementById("welcomeMessage").innerHTML = "Welcome " + firstName +" To IIIT Bangalore"
-let tableBody = document.getElementById('bills');
-tableBody.innerHTML = "";
+async function start() {
+    let queries = queryString.split('&');
+    let userName = queries[0].substring(9);
+    let firstName = queries[1].substring(5);
+    console.log(firstName + " " + userName);
 
-let response = await fetch('api/bills/show', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({
-        userName: document.getElementById('userName').value
-    })
-});
-
-bills = await response.json();
+    document.getElementById("welcomeMessage").innerHTML = "Welcome " + firstName + " To IIIT Bangalore"
 
 
-for (let i = 0; i < 1; i++) {
-    tableBody.innerHTML += '<tr>';
-    let temp = "";
-    temp += '<td>' + 'Registration Fee' + '</td>';
-    temp += '<td>' + '10-Dec-2020' + '</td>';
-    temp += '<td>' + '15-Dec-2020' + '</td>';
-    temp += '<td>' + '1000' + '</td>';
-    temp += '<td>' + '0' + '</td>';
-    temp += '<td>' + '1000' + '</td>';
-    temp += '<td>' + '1000' + '</td>';
-    tableBody.innerHTML += temp + '</tr>';
+    let response = await fetch('api/bills/show', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            userName: userName
+        })
+    });
+
+    let billsList = await response.json();
+    if (billsList.length === 0) {
+        document.getElementById('heading').innerHTML = "Great !!! No Pending bills for your account";
+        document.getElementById('show-bills').remove();
+    } else {
+        document.getElementById('heading').innerHTML = "Following are the bills related to your account";
+
+        let tableBody = document.getElementById('bills');
+        tableBody.innerHTML = "";
+        for (let i = 0; i < billsList.length; i++) {
+            tableBody.innerHTML += '<tr>';
+            let temp = "";
+            temp += '<td>' + billsList[i].description + '</td>';
+            temp += '<td>' + billsList[i].billDate + '</td>';
+            temp += '<td>' + billsList[i].deadline + '</td>';
+            temp += '<td>' + billsList[i].totalAmount + '</td>';
+            temp += '<td>' + billsList[i].paidAmount + '</td>';
+            temp += '<td>' + billsList[i].remainingAmount + '</td>';
+            temp += '<td>' + billsList[i].remainingAmount + '</td>';
+            tableBody.innerHTML += temp + '</tr>';
+        }
+    }
 }
-
-

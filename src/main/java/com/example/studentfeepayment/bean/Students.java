@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Students")
-public class Students implements Cloneable{
+public class Students implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -190,7 +190,7 @@ public class Students implements Cloneable{
         return super.clone();
     }
 
-    public Students shallowCopy() throws CloneNotSupportedException{
+    public Students shallowCopy() throws CloneNotSupportedException {
         Students clonedStudent = (Students) this.clone();
         clonedStudent.bills = new ArrayList<>();
         for (Bills bill : this.bills) {

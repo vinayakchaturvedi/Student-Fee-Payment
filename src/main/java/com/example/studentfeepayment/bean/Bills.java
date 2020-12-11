@@ -47,16 +47,16 @@ public class Bills implements Cloneable {
         this.description = description;
     }
 
-    public LocalDateTime getBillDate() {
-        return billDate;
+    public String getBillDate() {
+        return billDate.getDayOfMonth() + "-" + billDate.getMonth() + "-" + billDate.getYear();
     }
 
     public void setBillDate(LocalDateTime dateTime) {
         this.billDate = dateTime;
     }
 
-    public LocalDateTime getDeadline() {
-        return deadline;
+    public String getDeadline() {
+        return deadline.getDayOfMonth() + "-" + deadline.getMonth() + "-" + deadline.getYear();
     }
 
     public void setDeadline(LocalDateTime deadline) {
@@ -108,12 +108,12 @@ public class Bills implements Cloneable {
     public String toString() {
         return "Bills{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
+                ", description='" + description +
                 ", totalAmount=" + totalAmount +
                 ", paidAmount=" + paidAmount +
                 ", remainingAmount=" + remainingAmount +
-                ", billDate=" + billDate +
-                ", deadline=" + deadline +
+                ", billDate=" + billDate.getDayOfMonth() + "-" + billDate.getMonth() + "-" + billDate.getYear() +
+                ", deadline=" + deadline.getDayOfMonth() + "-" + deadline.getMonth() + "-" + deadline.getYear() +
                 '}';
     }
 
