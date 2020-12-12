@@ -7,7 +7,8 @@ async function start() {
     let firstName = queries[1].substring(5);
     console.log(firstName + " " + userName);
 
-    document.getElementById("welcomeMessage").innerHTML = "Welcome " + firstName + " To IIIT Bangalore"
+    document.getElementById("welcomeMessage").innerHTML = "Welcome " + firstName + " To IIIT Bangalore";
+    document.getElementById("rollNumber").innerHTML = "Your Roll Number & User Name is " + userName;
 
 
     let response = await fetch('api/bills/show', {
@@ -37,7 +38,6 @@ async function start() {
             temp += '<td>' + billsList[i].deadline + '</td>';
             temp += '<td>' + billsList[i].totalAmount + '</td>';
             temp += '<td>' + billsList[i].paidAmount + '</td>';
-            temp += '<td>' + billsList[i].remainingAmount + '</td>';
             temp += '<td>' + billsList[i].remainingAmount + '</td>';
             temp += '<td><input class=\'myclass\' type=\'button\' value=\'Pay Now\'/></td>'
 

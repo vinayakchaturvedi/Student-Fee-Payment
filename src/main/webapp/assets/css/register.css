@@ -1,12 +1,12 @@
 .register{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-    margin-top: 3%;
+    margin-top: 7%;
     padding: 3%;
 }
 
 body {
     font-family: "Karla", sans-serif;
-    background-color: #d0d0ce;
+    background-color: #1F2739;
     min-height: 100vh; }
 
 .register-left{
