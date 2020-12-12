@@ -21,10 +21,10 @@ public class StudentOperationsDAO {
         try {
             transaction = session.beginTransaction();
             List<Bills> bills = student.getBills();
+            session.save(student);
             for (Bills bill : bills) {
                 session.save(bill);
             }
-            session.save(student);
             transaction.commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -36,7 +36,7 @@ public class StudentOperationsDAO {
         return true;
     }
 
-    public Students validateAndRetrieveStudent(final Students student) {
+    public Students validateAndRetrieveStudent(final Students student, boolean requirePassword) {
         Session session = SessionUtil.getSessionFactory().openSession();
         try {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -46,32 +46,10 @@ public class StudentOperationsDAO {
             Predicate userName = criteriaBuilder.like(studentsRoot.get("userName"), student.getUserName());
             Predicate password = criteriaBuilder.like(studentsRoot.get("password"), student.getPassword());
 
-            criteriaQuery.where(criteriaBuilder.and(userName, password));
-
-            Query<Students> query = session.createQuery(criteriaQuery);
-            List<Students> students = query.getResultList();
-
-            Students response = students.isEmpty() ? null : students.get(0).shallowCopy();
-            session.close();
-            return response;
-
-        } catch (Exception ex) {
-            session.close();
-            System.out.println(ex.getMessage());
-            return null;
-        }
-    }
-
-    public Students retrieveStudentBills(final Students student) {
-        Session session = SessionUtil.getSessionFactory().openSession();
-        try {
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Students> criteriaQuery = criteriaBuilder.createQuery(Students.class);
-            Root<Students> studentsRoot = criteriaQuery.from(Students.class);
-            criteriaQuery.select(studentsRoot);
-            Predicate userName = criteriaBuilder.like(studentsRoot.get("userName"), student.getUserName());
-
-            criteriaQuery.where(criteriaBuilder.and(userName));
+            if (requirePassword)
+                criteriaQuery.where(criteriaBuilder.and(userName, password));
+            else
+                criteriaQuery.where(userName);
 
             Query<Students> query = session.createQuery(criteriaQuery);
             List<Students> students = query.getResultList();

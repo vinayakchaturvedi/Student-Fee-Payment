@@ -34,7 +34,10 @@ public class StudentOperationsService {
         student.setBills(generateBills());
 
         StudentOperationsDAO sopDAO = new StudentOperationsDAO();
-        sopDAO.registerStudent(student);
+        if (!sopDAO.registerStudent(student)) {
+            latestRollNumber--;
+            return null;
+        }
 
         return student;
     }
@@ -75,7 +78,7 @@ public class StudentOperationsService {
     public Students validateStudentLogin(final Students student) {
         if (student.getUserName().isEmpty() || student.getPassword().isEmpty()) return null;
         StudentOperationsDAO sopDAO = new StudentOperationsDAO();
-        Students response = sopDAO.validateAndRetrieveStudent(student);
+        Students response = sopDAO.validateAndRetrieveStudent(student, true);
         return response;
     }
 }

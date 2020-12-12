@@ -10,7 +10,7 @@ public class ShowStudentBillsService {
 
     public List<Bills> getBills(Students student) {
         StudentOperationsDAO sopDAO = new StudentOperationsDAO();
-        Students response = sopDAO.retrieveStudentBills(student);
+        Students response = sopDAO.validateAndRetrieveStudent(student, false);
         List<Bills> bills = response.getBills();
         for (int i = 0; i < bills.size(); i++) {
             if (bills.get(0).getRemainingAmount() == 0) {

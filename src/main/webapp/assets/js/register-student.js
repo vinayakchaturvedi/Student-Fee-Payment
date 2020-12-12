@@ -18,11 +18,16 @@ register_form.addEventListener('submit', async (e) => {
                 graduationYear: document.getElementById('graduationYear').value,
             })
         });
-        student = await response.json();
-        console.log(student);
         let myStatus = response.status;
-        register_form.classList.add('was-validated');
-        let queryString = "?userName=" + student.userName + "&name=" + student.firstName;
-        window.location.href = "Bills.html" + queryString;
+        if (myStatus === 404) {
+            document.getElementById("dupeEmail").innerHTML = "Given Email id is already registered with us please enter a different Email id !!!";
+        } else {
+            student = await response.json();
+            console.log(student);
+            let myStatus = response.status;
+            register_form.classList.add('was-validated');
+            let queryString = "?userName=" + student.userName + "&name=" + student.firstName;
+            window.location.href = "Bills.html" + queryString;
+        }
     }
 });

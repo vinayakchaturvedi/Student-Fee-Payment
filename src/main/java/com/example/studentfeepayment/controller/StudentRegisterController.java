@@ -22,6 +22,8 @@ public class StudentRegisterController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerStudent(Students request) throws URISyntaxException, JsonProcessingException {
         Students response = GetInstances.getInstanceOfStudentOperationService().registerStudent(request);
+        if (response == null) return Response.status(Response.Status.NOT_FOUND).build();
+
         System.out.println("Response from service and DAO for registering a new student: " + response.toString());
 
         ObjectMapper mapper = new ObjectMapper();
