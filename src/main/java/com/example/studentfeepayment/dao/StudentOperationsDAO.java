@@ -69,15 +69,15 @@ public class StudentOperationsDAO {
         Session session = SessionUtil.getSessionFactory().openSession();
         try {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Integer> criteriaQuery = criteriaBuilder.createQuery(Integer.class);
+            CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
             Root<Students> studentsRoot = criteriaQuery.from(Students.class);
-            criteriaQuery.select(criteriaBuilder.max(studentsRoot.get("studentId")));
+            criteriaQuery.select(criteriaBuilder.count(studentsRoot.get("studentId")));
 
-            Query<Integer> query = session.createQuery(criteriaQuery);
-            List<Integer> ids = query.getResultList();
+            Query<Long> query = session.createQuery(criteriaQuery);
+            List<Long> ids = query.getResultList();
 
             session.close();
-            return ids == null || ids.isEmpty() || ids.get(0) == null ? 0 : ids.get(0);
+            return ids == null || ids.isEmpty() || ids.get(0) == null ? 0 : ids.get(0).intValue();
 
         } catch (Exception ex) {
             session.close();
