@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to IIIT Bangalore</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bills.css">
+</head>
+<body>
+<h1 id="welcomeMessage"></h1>
+<h2></h2>
+<h2 id="heading"></h2>
+
+<h2 id="paymentDone" class="thanks"></h2>
+
+<table class="container" id="summaryTable">
+    <thead>
+    <tr>
+        <th><h1>Description</h1></th>
+        <th><h1>Amount</h1></th>
+    </tr>
+    </thead>
+    <tbody id="show-bills-summary">
+    </tbody>
+</table>
+<div class="payment center" id="payment">
+    <div id="paymentButton">
+        <button class="btn paymentButton" type="submit" onclick="payment()">Confirm & Pay</button>
+    </div>
+</div>
+<script src="assets/js/bill-summary.js"></script>
+</body>
+</html>

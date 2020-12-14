@@ -11,25 +11,27 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     line-height: 1.42em;
-    color:#A7A1AE;
-    background-color:#1F2739;
+    color: #A7A1AE;
+    background-color: #1F2739;
 }
 
 h1 {
-    font-size:3em;
+    font-size: 3em;
     font-weight: 300;
-    line-height:1em;
+    line-height: 1em;
     text-align: center;
     color: #4DC3FA;
+    margin-top: 10px;
 }
 
 h2 {
-    font-size:1em;
+    font-size: 1em;
     font-weight: 300;
     text-align: center;
     display: block;
-    line-height:1em;
+    line-height: 1em;
     color: #cefb66;
+    margin-top: 10px;
 }
 
 h2 a {
@@ -39,13 +41,18 @@ h2 a {
     text-decoration: none;
 }
 
-.blue { color: #185875; }
-.yellow { color: #FFF842; }
+.blue {
+    color: #185875;
+}
+
+.yellow {
+    color: #FFF842;
+}
 
 .container th h1 {
     font-weight: bold;
     font-size: 1em;
-    text-align: left;
+    text-align: center;
     color: #185875;
 }
 
@@ -58,18 +65,18 @@ h2 a {
 }
 
 .container {
-    text-align: left;
+    text-align: center;
     overflow: hidden;
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     display: table;
-    padding: 0 0 8em 0;
+    padding: 0 0 1em 0;
 }
 
-.container td, .container th {
+.container th {
     padding-bottom: 2%;
     padding-top: 2%;
-    padding-left:2%;
+    padding-left: 2%;
 }
 
 /* Background-color of the odd rows */
@@ -86,7 +93,9 @@ h2 a {
     background-color: #1F2739;
 }
 
-.container td:first-child { color: #FB667A; }
+.container td:first-child {
+    color: #FB667A;
+}
 
 .container tr:hover {
     background-color: #464A52;
@@ -105,15 +114,54 @@ h2 a {
     transition-timing-function: line;
 }
 
-.myclass{
-    display:inline-block;
+.myclass {
+    display: inline-block;
     width: 80px;
     height: 40px;
 
-    background-color: #FFF842;
+    background-color: #57698e;
 }
 
 @media (max-width: 800px) {
     .container td:nth-child(4),
-    .container th:nth-child(4) { display: none; }
+    .container th:nth-child(4) {
+        display: none;
+    }
+}
+
+.totalAmount {
+    margin-left: 10%;
+    float: left;
+}
+
+.paymentButton {
+    margin-left: 1em;
+    float: left;
+    padding: 3px 15px;
+    background-color: #57698e;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+
+.center {
+    float: left;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.payment {
+    margin-top: 1em;
+    text-align: center;
+}
+
+.thanks {
+    margin-top: 2em;
+    font-size: 2em;
 }

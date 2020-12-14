@@ -28,4 +28,20 @@ public class ShowBillsController {
         return Response.ok().entity(response).build();
     }
 
+    /**
+     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak&Registration Fees=500&Library Fees=1000"}
+     * @return
+     * @throws URISyntaxException
+     * @throws JsonProcessingException
+     */
+    @POST
+    @Path("/pay")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response payBills(String request) throws URISyntaxException, JsonProcessingException {
+        System.out.println("Request for paying bills: " + request);
+        boolean response = new ShowStudentBillsService().payBills(request);
+        return Response.ok().build();
+    }
+
 }

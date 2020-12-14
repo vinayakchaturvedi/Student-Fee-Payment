@@ -1,10 +1,12 @@
 let queryString = decodeURIComponent(window.location.search).substring(1);
+let billsList = null, userName, firstName;
+let dict = {};
 let promiseResponse = start();
 
 async function start() {
     let queries = queryString.split('&');
-    let userName = queries[0].substring(9);
-    let firstName = queries[1].substring(5);
+    userName = queries[0].substring(9);
+    firstName = queries[1].substring(5);
     console.log(firstName + " " + userName);
 
     document.getElementById("welcomeMessage").innerHTML = "Welcome " + firstName + " To IIIT Bangalore";
@@ -21,10 +23,11 @@ async function start() {
         })
     });
 
-    let billsList = await response.json();
+    billsList = await response.json();
     if (billsList.length === 0) {
         document.getElementById('heading').innerHTML = "Great !!! No Pending bills for your account";
         document.getElementById('show-bills').remove();
+        document.getElementById('payment').remove();
     } else {
         document.getElementById('heading').innerHTML = "Following are the bills related to your account";
 
@@ -39,9 +42,35 @@ async function start() {
             temp += '<td>' + billsList[i].totalAmount + '</td>';
             temp += '<td>' + billsList[i].paidAmount + '</td>';
             temp += '<td>' + billsList[i].remainingAmount + '</td>';
-            temp += '<td><input class=\'myclass\' type=\'button\' value=\'Pay Now\'/></td>'
+            temp += '<td> <input type="number" value=0 oninput="calculate()" onfocusout="calculate()" id="payment' + i + '" class="myclass" name="payment"/>' + '</td>';
 
             tableBody.innerHTML += temp + '</tr>';
         }
     }
+}
+
+function calculate() {
+    for (let i = 0; i < billsList.length; i++) {
+        if ((billsList[i].remainingAmount) - (document.getElementById("payment" + i).value) < 0) {
+            alert("Please enter the  value less then Remaining amount")
+        }
+    }
+    let sum = 0;
+
+    for (let i = 0; i < billsList.length; i++) {
+        const x = parseInt(document.getElementById("payment" + i).value);
+        sum += x;
+        document.getElementById('totalAmount').value = sum;
+        dict[billsList[i].description] = x;
+    }
+}
+
+function payment() {
+    let queryString = "?userName=" + userName + "&name=" + firstName;
+    for (let key in dict) {
+        if (parseInt(dict[key]) !== 0)
+            queryString += "&" + key + "=" + dict[key];
+    }
+    console.log("Query String: " + queryString);
+    window.location.href = "BillSummary.html" + queryString;
 }
