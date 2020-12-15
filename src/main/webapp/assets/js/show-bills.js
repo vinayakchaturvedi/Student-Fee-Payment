@@ -87,3 +87,7 @@ function payment() {
         window.location.href = "BillSummary.html" + queryString;
     }
 }
+
+async function goToHome() {
+        window.location.href = "Bills.html?" + queryString;
+}

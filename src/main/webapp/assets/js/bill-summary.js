@@ -65,4 +65,10 @@ async function payment() {
 
 async function goToHome() {
     window.location.href = "Bills.html?" + queryString;
+    console.log("BillSummary.html Page Home Button" + queryString)
+}
+async function goToH() {
+    let querystr = "userName=" + userName + "&name=" + firstName;
+    console.log("BillSummary.html Page Nav Home Button" + querystr)
+    window.location.href = "Bills.html?" + querystr;
 }
