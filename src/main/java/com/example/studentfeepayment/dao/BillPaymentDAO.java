@@ -1,10 +1,14 @@
 package com.example.studentfeepayment.dao;
 
+import com.example.studentfeepayment.bean.Bills;
+import com.example.studentfeepayment.bean.StudentPayment;
+import com.example.studentfeepayment.bean.Students;
 import com.example.studentfeepayment.utils.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.List;
 import java.util.Map;
 
 public class BillPaymentDAO {
@@ -31,6 +35,37 @@ public class BillPaymentDAO {
         }
         transaction.commit();
         session.close();
+        return true;
+    }
+
+    public boolean saveStudentPayment(StudentPayment studentPayment, Integer studentId, Integer billId) {
+        Session session = SessionUtil.getSessionFactory().openSession();
+        try {
+            Transaction transaction = session.beginTransaction();
+
+            String sqlQuery1 = "from Students where studentId = :studentId";
+            Query query1 = session.createQuery(sqlQuery1);
+            query1.setParameter("studentId", studentId);
+            List studentResult = query1.list();
+
+            String sqlQuery2 = "from Bills where id = :billId";
+            Query query2 = session.createQuery(sqlQuery2);
+            query2.setParameter("billId", billId);
+            List billResult = query2.list();
+
+            studentPayment.setStudent((Students) studentResult.get(0));
+            studentPayment.setBill((Bills) billResult.get(0));
+
+            session.save(studentPayment);
+            transaction.commit();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            session.close();
+            return false;
+        } finally {
+            session.close();
+        }
+
         return true;
     }
 }

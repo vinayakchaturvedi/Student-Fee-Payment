@@ -1,15 +1,18 @@
 package com.example.studentfeepayment.service;
 
 import com.example.studentfeepayment.bean.Bills;
+import com.example.studentfeepayment.bean.StudentPayment;
 import com.example.studentfeepayment.bean.Students;
 import com.example.studentfeepayment.dao.BillPaymentDAO;
 import com.example.studentfeepayment.dao.StudentOperationsDAO;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShowStudentBillsService {
+public class BillsOperationService {
 
     public List<Bills> getBills(Students student) {
         StudentOperationsDAO sopDAO = new StudentOperationsDAO();
@@ -29,7 +32,7 @@ public class ShowStudentBillsService {
      */
     public boolean payBills(String request) {
         String[] keyValuePair = request.substring(16, request.length() - 2).split("&");
-        //string.substring(16, string.length()-2).split("&")[0].split("=")[1]
+        List<StudentPayment> paymentList;
 
         Students studentInQuery = new Students();
         studentInQuery.setUserName(keyValuePair[0].split("=")[1]);
@@ -45,9 +48,17 @@ public class ShowStudentBillsService {
             String billType = keyValuePair[i].split("=")[0];
             Integer amount = Integer.parseInt(keyValuePair[i].split("=")[1]);
             billToPay.put(typeToId.get(billType), amount);
+            createAndSaveStudentPayment(response.getStudentId(), billType, typeToId.get(billType), amount);
         }
 
         BillPaymentDAO billPaymentDAO = new BillPaymentDAO();
         return billPaymentDAO.payBill(billToPay);
+    }
+
+    private boolean createAndSaveStudentPayment(Integer studentId, String billType, Integer billId, Integer amount) {
+
+        StudentPayment studentPayment = new StudentPayment(billType, amount, LocalDateTime.now());
+        BillPaymentDAO billPaymentDAO = new BillPaymentDAO();
+        return billPaymentDAO.saveStudentPayment(studentPayment, studentId, billId);
     }
 }

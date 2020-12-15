@@ -28,10 +28,14 @@ public class Students implements Cloneable {
     @Column(nullable = false)
     private Integer totalCredits;
     private Integer graduationYear;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "StudentBills", joinColumns = {@JoinColumn(name = "studentId")},
             inverseJoinColumns = {@JoinColumn(name = "billId")})
     private List<Bills> bills;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<StudentPayment> studentPaymentList;
 
     /**
      * Foreign Keys
@@ -60,6 +64,7 @@ public class Students implements Cloneable {
         this.totalCredits = totalCredits;
         this.graduationYear = graduationYear;
         this.bills = bills;
+        this.studentPaymentList = new ArrayList<>();
     }
 
     public Integer getStudentId() {
@@ -158,6 +163,14 @@ public class Students implements Cloneable {
         this.bills = new ArrayList<>(bills);
     }
 
+    public List<StudentPayment> getStudentPaymentList() {
+        return studentPaymentList;
+    }
+
+    public void setStudentPaymentList(List<StudentPayment> studentPaymentList) {
+        this.studentPaymentList = studentPaymentList;
+    }
+
     @Override
     public String toString() {
         return "Students{" +
@@ -193,8 +206,13 @@ public class Students implements Cloneable {
     public Students shallowCopy() throws CloneNotSupportedException {
         Students clonedStudent = (Students) this.clone();
         clonedStudent.bills = new ArrayList<>();
+        clonedStudent.studentPaymentList = new ArrayList<>();
+
         for (Bills bill : this.bills) {
             clonedStudent.bills.add(bill.shallowCopy());
+        }
+        for (StudentPayment billPayment : this.studentPaymentList) {
+            clonedStudent.studentPaymentList.add(billPayment.shallowCopy());
         }
         return clonedStudent;
     }

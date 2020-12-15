@@ -2,7 +2,7 @@ package com.example.studentfeepayment.controller;
 
 import com.example.studentfeepayment.bean.Bills;
 import com.example.studentfeepayment.bean.Students;
-import com.example.studentfeepayment.service.ShowStudentBillsService;
+import com.example.studentfeepayment.service.BillsOperationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import javax.ws.rs.Consumes;
@@ -22,7 +22,7 @@ public class ShowBillsController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response showBills(Students request) throws URISyntaxException, JsonProcessingException {
-        List<Bills> response = new ShowStudentBillsService().getBills(request);
+        List<Bills> response = new BillsOperationService().getBills(request);
         System.out.println("Show Bills response: ");
         response.forEach(System.out::println);
         return Response.ok().entity(response).build();
@@ -40,7 +40,7 @@ public class ShowBillsController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response payBills(String request) throws URISyntaxException, JsonProcessingException {
         System.out.println("Request for paying bills: " + request);
-        boolean response = new ShowStudentBillsService().payBills(request);
+        boolean response = new BillsOperationService().payBills(request);
         return Response.ok().build();
     }
 

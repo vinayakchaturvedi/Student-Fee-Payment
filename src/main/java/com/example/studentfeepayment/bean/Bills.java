@@ -26,6 +26,9 @@ public class Bills implements Cloneable {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "bills")
     private List<Students> students;
 
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    private List<StudentPayment> billPaymentList;
+
     public Bills() {
     }
 
@@ -37,6 +40,7 @@ public class Bills implements Cloneable {
         this.billDate = billDate;
         this.deadline = deadline;
         this.students = new ArrayList<>();
+        this.billPaymentList = new ArrayList<>();
     }
 
     public String getDescription() {
@@ -104,6 +108,14 @@ public class Bills implements Cloneable {
         this.remainingAmount = remainingAmount;
     }
 
+    public List<StudentPayment> getBillPaymentList() {
+        return billPaymentList;
+    }
+
+    public void setBillPaymentList(List<StudentPayment> billPaymentList) {
+        this.billPaymentList = billPaymentList;
+    }
+
     @Override
     public String toString() {
         return "Bills{" +
@@ -124,6 +136,12 @@ public class Bills implements Cloneable {
     public Bills shallowCopy() throws CloneNotSupportedException {
         Bills clonedBill = (Bills) this.clone();
         clonedBill.students = new ArrayList<>();
+        clonedBill.billPaymentList = new ArrayList<>();
+
+        List<StudentPayment> billPaymentList = this.getBillPaymentList();
+        for (StudentPayment billPayment : billPaymentList) {
+            clonedBill.billPaymentList.add(billPayment.shallowCopy());
+        }
         return clonedBill;
     }
 }
