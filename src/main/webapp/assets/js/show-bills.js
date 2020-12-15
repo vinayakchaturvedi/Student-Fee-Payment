@@ -42,35 +42,44 @@ async function start() {
             temp += '<td>' + billsList[i].totalAmount + '</td>';
             temp += '<td>' + billsList[i].paidAmount + '</td>';
             temp += '<td>' + billsList[i].remainingAmount + '</td>';
-            temp += '<td> <input type="number" value=0 oninput="calculate()" onfocusout="calculate()" id="payment' + i + '" class="myclass" name="payment"/>' + '</td>';
+            temp += '<td> <input type="number" value=0 oninput="calculate()" min=0 onfocusout="calculate()" id="payment' + i + '" class="myclass" name="payment"/>' + '</td>';
 
             tableBody.innerHTML += temp + '</tr>';
         }
     }
 }
 
+let finalSum = 0;
+
 function calculate() {
     for (let i = 0; i < billsList.length; i++) {
         if ((billsList[i].remainingAmount) - (document.getElementById("payment" + i).value) < 0) {
             alert("Please enter the  value less then Remaining amount")
+            document.getElementById("payment" + i).value = 0;
         }
     }
     let sum = 0;
 
     for (let i = 0; i < billsList.length; i++) {
-        const x = parseInt(document.getElementById("payment" + i).value);
+        let val = document.getElementById("payment" + i).value;
+        const x = parseInt(val === "" ? "0" : val);
         sum += x;
         document.getElementById('totalAmount').value = sum;
         dict[billsList[i].description] = x;
     }
+    finalSum = sum;
 }
 
 function payment() {
-    let queryString = "?userName=" + userName + "&name=" + firstName;
-    for (let key in dict) {
-        if (parseInt(dict[key]) !== 0)
-            queryString += "&" + key + "=" + dict[key];
+    if (finalSum === 0) {
+        alert("Your Total Payment Amount is 0")
+    } else {
+        let queryString = "?userName=" + userName + "&name=" + firstName;
+        for (let key in dict) {
+            if (parseInt(dict[key]) !== 0)
+                queryString += "&" + key + "=" + dict[key];
+        }
+        console.log("Query String: " + queryString);
+        window.location.href = "BillSummary.html" + queryString;
     }
-    console.log("Query String: " + queryString);
-    window.location.href = "BillSummary.html" + queryString;
 }
