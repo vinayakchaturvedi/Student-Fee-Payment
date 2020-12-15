@@ -31,8 +31,8 @@ async function start() {
 
     tableBody.innerHTML += '<tr>';
     let temp = "";
-    temp += '<td>' + "Total Amount" + '</td>';
-    temp += '<td>' + sum + '</td>';
+    temp += '<td><h2 class="total">' + "Total Amount" + '</h2></td>';
+    temp += '<td><h2 class="total">' + sum + '</h2></td>';
     tableBody.innerHTML += temp + '</tr>';
 }
 

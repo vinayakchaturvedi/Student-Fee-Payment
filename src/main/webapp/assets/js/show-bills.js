@@ -54,7 +54,11 @@ let finalSum = 0;
 function calculate() {
     for (let i = 0; i < billsList.length; i++) {
         if ((billsList[i].remainingAmount) - (document.getElementById("payment" + i).value) < 0) {
-            alert("Please enter the  value less then Remaining amount")
+            alert("Please enter the  value less then Remaining amount.")
+            document.getElementById("payment" + i).value = 0;
+        }
+        if((document.getElementById("payment" + i).value).startsWith("-")){
+            alert("Please enter positive amount.")
             document.getElementById("payment" + i).value = 0;
         }
     }
