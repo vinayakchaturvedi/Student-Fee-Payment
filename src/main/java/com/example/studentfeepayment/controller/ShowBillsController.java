@@ -1,6 +1,7 @@
 package com.example.studentfeepayment.controller;
 
 import com.example.studentfeepayment.bean.Bills;
+import com.example.studentfeepayment.bean.StudentPayment;
 import com.example.studentfeepayment.bean.Students;
 import com.example.studentfeepayment.service.BillsOperationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,6 +43,23 @@ public class ShowBillsController {
         System.out.println("Request for paying bills: " + request);
         boolean response = new BillsOperationService().payBills(request);
         return Response.ok().build();
+    }
+
+    /**
+     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak&Registration Fees=500&Library Fees=1000"}
+     * @return
+     * @throws URISyntaxException
+     * @throws JsonProcessingException
+     */
+    @POST
+    @Path("/paid")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response paidBills(Students request) throws URISyntaxException, JsonProcessingException {
+        List<StudentPayment> response = new BillsOperationService().paidBills(request);
+        System.out.println("Paid Bills response: ");
+        response.forEach(System.out::println);
+        return Response.ok().entity(response).build();
     }
 
 }

@@ -1,6 +1,5 @@
 let queryString = decodeURIComponent(window.location.search).substring(1);
 let billsList = null, userName, firstName;
-let dict = {};
 let promiseResponse = start();
 
 async function start() {
@@ -37,21 +36,15 @@ async function start() {
             tableBody.innerHTML += '<tr>';
             let temp = "";
             temp += '<td>' + billsList[i].description + '</td>';
-            temp += '<td>' + billsList[i].billDate + '</td>';
-            temp += '<td>' + billsList[i].deadline + '</td>';
-            temp += '<td>' + billsList[i].totalAmount + '</td>';
-            temp += '<td>' + billsList[i].paidAmount + '</td>';
-            temp += '<td>' + billsList[i].remainingAmount + '</td>';
-            temp += '<td> <input type="number" value=0 oninput="calculate()" min=0 onfocusout="calculate()" id="payment' + i + '" class="myclass" name="payment"/>' + '</td>';
-
+            temp += '<td>' + billsList[i].paymentDate + '</td>';
+            temp += '<td>' + billsList[i].amount + '</td>';
             tableBody.innerHTML += temp + '</tr>';
         }
     }
 }
 
 async function gotoshowPayment()
-{   let querystr = "userName=" + userName + "&name=" + firstName;
-    window.location.href="BillPayment.html?"+querystr;
+{   window.location.href="BillPayment.html?"+queryString;
 }
 
 async function goToHome() {

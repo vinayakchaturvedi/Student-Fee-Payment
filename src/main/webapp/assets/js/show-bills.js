@@ -88,8 +88,7 @@ function payment() {
     }
 }
 async function gotoshowPayment()
-{   let querystr = "userName=" + userName + "&name=" + firstName;
-    window.location.href="BillPayment.html?"+querystr;
+{   window.location.href="BillPayment.html?"+queryString;
 }
 
 async function goToHome() {
