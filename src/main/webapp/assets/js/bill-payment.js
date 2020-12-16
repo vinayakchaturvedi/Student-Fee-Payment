@@ -36,7 +36,7 @@ async function start() {
             tableBody.innerHTML += '<tr>';
             let temp = "";
             temp += '<td>' + billsList[i].description + '</td>';
-            temp += '<td>' + billsList[i].paymentDate + '</td>';
+            temp += '<td>' + billsList[i].dateTime + '</td>';
             temp += '<td>' + billsList[i].amount + '</td>';
             tableBody.innerHTML += temp + '</tr>';
         }
