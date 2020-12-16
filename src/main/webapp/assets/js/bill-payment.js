@@ -29,22 +29,21 @@ async function start() {
 
     } else {
         document.getElementById('heading').innerHTML = "Following are the Paid bills related to your account";
-
         let tableBody = document.getElementById('paidbills');
         tableBody.innerHTML = "";
         for (let i = 0; i < billsList.length; i++) {
             tableBody.innerHTML += '<tr>';
             let temp = "";
             temp += '<td>' + billsList[i].description + '</td>';
-            temp += '<td>' + billsList[i].dateTime + '</td>';
+            temp += '<td>' + billsList[i].paymentDate + '</td>';
             temp += '<td>' + billsList[i].amount + '</td>';
             tableBody.innerHTML += temp + '</tr>';
         }
     }
 }
 
-async function gotoshowPayment()
-{   window.location.href="BillPayment.html?"+queryString;
+async function gotoshowPayment() {
+    window.location.href="BillPayment.html?"+queryString;
 }
 
 async function goToHome() {

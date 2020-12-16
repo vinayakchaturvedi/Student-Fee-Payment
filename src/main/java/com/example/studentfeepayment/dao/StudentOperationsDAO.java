@@ -65,35 +65,6 @@ public class StudentOperationsDAO {
         }
     }
 
-    public Students billsRetrieveStudent(final Students student, boolean requirePassword) {
-        Session session = SessionUtil.getSessionFactory().openSession();
-        try {
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-            CriteriaQuery<Students> criteriaQuery = criteriaBuilder.createQuery(Students.class);
-            Root<Students> studentsRoot = criteriaQuery.from(Students.class);
-            criteriaQuery.select(studentsRoot);
-            Predicate userName = criteriaBuilder.like(studentsRoot.get("userName"), student.getUserName());
-            Predicate password = criteriaBuilder.like(studentsRoot.get("password"), student.getPassword());
-
-            if (requirePassword)
-                criteriaQuery.where(criteriaBuilder.and(userName, password));
-            else
-                criteriaQuery.where(userName);
-
-            Query<Students> query = session.createQuery(criteriaQuery);
-            List<Students> students = query.getResultList();
-
-            Students response = students.isEmpty() ? null : students.get(0).shallowCopy();
-            session.close();
-            return response;
-
-        } catch (Exception ex) {
-            session.close();
-            System.out.println(ex.getMessage());
-            return null;
-        }
-    }
-
     public Integer getMaxId() {
         Session session = SessionUtil.getSessionFactory().openSession();
         try {

@@ -85,11 +85,11 @@ public class StudentPayment implements Cloneable{
     public String toString() {
         return "StudentPayment{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
+                ", description='" + description +
                 ", amount=" + amount +
-                ", paymentDate=" + paymentDate +
+                ", paymentDate=" + paymentDate.getDayOfMonth() + "-" + paymentDate.getMonth() + "-" + paymentDate.getYear() +
                 ", student=" + student +
-                ", bill from payment=" + bill +
+                ", bill=" + bill +
                 '}';
     }
 

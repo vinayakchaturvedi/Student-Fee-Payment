@@ -28,7 +28,7 @@ public class BillsOperationService {
 
     public List<StudentPayment> paidBills(Students student) {
         StudentOperationsDAO sopDAO = new StudentOperationsDAO();
-        Students response = sopDAO.billsRetrieveStudent(student, false);
+        Students response = sopDAO.validateAndRetrieveStudent(student, false);
         List<StudentPayment> bills = response.getStudentPaymentList();
       /*  for (int i = 0; i < bills.size(); i++) {
             if (bills.get(i).getStudent().equals(0)) {
