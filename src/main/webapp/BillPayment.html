@@ -12,12 +12,12 @@
 <body>
 <div>
     <nav>
-        <img src="assets/images/iiitb-invert-logo.png" onclick="goToH()" alt="">
+        <img src="assets/images/iiitb-invert-logo.png" onclick="goToHome()" alt="">
         <label class="logo"> IIIT - Bangalore</label>
         <ul>
-            <li><a  onclick="goToH()" >Home</a></li>
-            <li><a  onclick="gotoshowPayment()">Show Payments</a></li>
-            <li><a  onclick="">Notification</a></li>
+            <li><a onclick="goToHome()" >Home</a></li>
+            <li><a onclick="gotoshowPayment()">Show Payments</a></li>
+            <li><a onclick="">Notification</a></li>
             <li><a href="index.html" >Logout</a></li>
         </ul>
         <label id="icon">
@@ -26,27 +26,22 @@
     </nav>
 </div>
 <h1 id="welcomeMessage"></h1>
-<h2></h2>
+<h2 id="rollNumber"></h2>
 <h2 id="heading"></h2>
 
-<h2 id="paymentDone" class="thanks"></h2>
-
-<table class="container" id="summaryTable">
+<table class="container" id="show-payments" >
     <thead>
     <tr>
         <th><h1>Description</h1></th>
-        <th><h1>Amount</h1></th>
+        <th><h1>Payment Date</h1></th>
+        <th><h1>Paid Amount</h1></th>
     </tr>
     </thead>
-    <tbody id="show-bills-summary">
+    <tbody id="paidbills">
     </tbody>
 </table>
-<div class="payment center" id="payment">
-    <div id="paymentButton">
-        <button class="btn paymentButton" type="submit" onclick="payment()">Confirm & Pay</button>
-    </div>
-</div>
-<script src="assets/js/bill-summary.js"></script>
+</body>
+<script src="assets/js/bill-payment.js."></script>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
@@ -56,5 +51,4 @@
         });
     });
 </script>
-</body>
 </html>

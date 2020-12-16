@@ -13,7 +13,7 @@ async function start() {
     document.getElementById("rollNumber").innerHTML = "Your Roll Number & User Name is " + userName;
 
 
-    let response = await fetch('api/bills/show', {
+    let response = await fetch('api/bills/paid', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -25,13 +25,13 @@ async function start() {
 
     billsList = await response.json();
     if (billsList.length === 0) {
-        document.getElementById('heading').innerHTML = "Great !!! No Pending bills for your account";
-        document.getElementById('show-bills').remove();
-        document.getElementById('payment').remove();
-    } else {
-        document.getElementById('heading').innerHTML = "Following are the bills related to your account";
+        document.getElementById('heading').innerHTML = "You didn't paid any of the bills";
+        document.getElementById('show-payments').remove();
 
-        let tableBody = document.getElementById('bills');
+    } else {
+        document.getElementById('heading').innerHTML = "Following are the Paid bills related to your account";
+
+        let tableBody = document.getElementById('paidbills');
         tableBody.innerHTML = "";
         for (let i = 0; i < billsList.length; i++) {
             tableBody.innerHTML += '<tr>';
@@ -49,49 +49,11 @@ async function start() {
     }
 }
 
-let finalSum = 0;
-
-function calculate() {
-    for (let i = 0; i < billsList.length; i++) {
-        if ((billsList[i].remainingAmount) - (document.getElementById("payment" + i).value) < 0) {
-            alert("Please enter the  value less then Remaining amount.")
-            document.getElementById("payment" + i).value = 0;
-        }
-        if((document.getElementById("payment" + i).value).startsWith("-")){
-            alert("Please enter positive amount.")
-            document.getElementById("payment" + i).value = 0;
-        }
-    }
-    let sum = 0;
-
-    for (let i = 0; i < billsList.length; i++) {
-        let val = document.getElementById("payment" + i).value;
-        const x = parseInt(val === "" ? "0" : val);
-        sum += x;
-        document.getElementById('totalAmount').value = sum;
-        dict[billsList[i].description] = x;
-    }
-    finalSum = sum;
-}
-
-function payment() {
-    if (finalSum === 0) {
-        alert("Your Total Payment Amount is 0")
-    } else {
-        let queryString = "?userName=" + userName + "&name=" + firstName;
-        for (let key in dict) {
-            if (parseInt(dict[key]) !== 0)
-                queryString += "&" + key + "=" + dict[key];
-        }
-        console.log("Query String: " + queryString);
-        window.location.href = "BillSummary.html" + queryString;
-    }
-}
 async function gotoshowPayment()
 {   let querystr = "userName=" + userName + "&name=" + firstName;
     window.location.href="BillPayment.html?"+querystr;
 }
 
 async function goToHome() {
-        window.location.href = "Bills.html?" + queryString;
+    window.location.href = "Bills.html?" + queryString;
 }

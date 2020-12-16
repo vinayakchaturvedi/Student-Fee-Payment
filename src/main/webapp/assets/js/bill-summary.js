@@ -52,9 +52,11 @@ async function payment() {
     let result = await response;
     console.log(response)
 
-    document.getElementById("heading").remove();
+    document.getElementById("heading").a;
     document.getElementById("summaryTable").remove();
     document.getElementById("paymentButton").remove();
+
+
 
     document.getElementById("paymentDone").innerHTML = "Thanks for paying you bills please click on the below button to redirect to your Home page";
     let Homebutton = document.getElementById('payment');
@@ -65,10 +67,12 @@ async function payment() {
 
 async function goToHome() {
     window.location.href = "Bills.html?" + queryString;
-    console.log("BillSummary.html Page Home Button" + queryString)
 }
 async function goToH() {
     let querystr = "userName=" + userName + "&name=" + firstName;
-    console.log("BillSummary.html Page Nav Home Button" + querystr)
     window.location.href = "Bills.html?" + querystr;
+}
+async function gotoshowPayment()
+{   let querystr = "userName=" + userName + "&name=" + firstName;
+    window.location.href="BillPayment.html?"+querystr;
 }

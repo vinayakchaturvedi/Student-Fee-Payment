@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome to IIIT Bangalore</title>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
-    <script>
-       $(document).ready(function (){
-           $('#icon').click(function(){
-            $('ul').toggleClass('show');
-            });
-       });
-    </script>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/bills.css">
     <link rel="stylesheet" href="assets/css/nav.css">
@@ -21,13 +12,13 @@
 <body>
 <div>
 <nav>
-    <img src="assets/images/iiitb-invert-logo.png" alt="">
+    <img src="assets/images/iiitb-invert-logo.png" onclick="goToHome()" alt="">
     <label class="logo"> IIIT - Bangalore</label>
     <ul>
         <li><a onclick="goToHome()" >Home</a></li>
-        <li><a onclick="">Show Payments</a></li>
+        <li><a onclick="gotoshowPayment()">Show Payments</a></li>
         <li><a onclick="">Notification</a></li>
-        <li><a onclick="">Logout</a></li>
+        <li><a href="index.html" >Logout</a></li>
     </ul>
     <label id="icon">
         <i class="fas fa-bars"></i>
@@ -38,7 +29,7 @@
 <h2 id="rollNumber"></h2>
 <h2 id="heading"></h2>
 
-<table class="container" id="show-bills">
+<table class="container" id="show-bills" >
     <thead>
     <tr>
         <th><h1>Description</h1></th>
@@ -53,17 +44,6 @@
     <tbody id="bills">
     </tbody>
 </table>
-<table class="container" id="show-payments">
-    <thead>
-    <tr>
-        <th><h1>Description</h1></th>
-        <th><h1>Payment Date</h1></th>
-        <th><h1>Paid Amount</h1></th>
-    </tr>
-    </thead>
-    <tbody id="paidbills">
-    </tbody>
-</table>
 <div class="payment" id="payment" style="width:800px; margin:0 auto;">
     <div class="totalAmount">
         <label for="totalAmount">Total Amount</label>
@@ -73,6 +53,15 @@
         <button class="btn paymentButton" type="submit" onclick="payment()">Proceed to Payment</button>
     </div>
 </div>
-<script src="assets/js/show-bills.js"></script>
 </body>
+<script src="assets/js/show-bills.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+    $(document).ready(function (){
+        $('#icon').click(function(){
+            $('ul').toggleClass('show');
+        });
+    });
+</script>
 </html>
