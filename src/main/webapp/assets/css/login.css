@@ -15,7 +15,8 @@ body {
 }
 
 .brand-wrapper .logo {
-    height: 37px;
+    height: 50px;
+    width: 60px;
 }
 
 .login-card {

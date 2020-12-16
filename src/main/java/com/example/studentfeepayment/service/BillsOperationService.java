@@ -30,16 +30,12 @@ public class BillsOperationService {
         StudentOperationsDAO sopDAO = new StudentOperationsDAO();
         Students response = sopDAO.validateAndRetrieveStudent(student, false);
         List<StudentPayment> bills = response.getStudentPaymentList();
-      /*  for (int i = 0; i < bills.size(); i++) {
-            if (bills.get(i).getStudent().equals(0)) {
-                bills.remove(i--);
-            }
-        }*/
+
         return bills;
     }
 
     /**
-     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak&Registration Fees=500&Library Fees=1000"}
+     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak"}
      * @return
      */
     public boolean payBills(String request) {

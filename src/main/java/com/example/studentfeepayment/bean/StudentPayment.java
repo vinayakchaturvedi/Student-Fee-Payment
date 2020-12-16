@@ -49,8 +49,9 @@ public class StudentPayment implements Cloneable{
         this.amount = amount;
     }
 
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
+    public String getPaymentDate() {
+        return paymentDate.getDayOfMonth() + "-" + paymentDate.getMonth() + "-" + paymentDate.getYear() +
+                " " + paymentDate.getHour()+":"+ paymentDate.getMinute() ;
     }
 
     public void setPaymentDate(LocalDateTime paymentDate) {
@@ -85,9 +86,9 @@ public class StudentPayment implements Cloneable{
     public String toString() {
         return "StudentPayment{" +
                 "id=" + id +
-                ", description='" + description +
+                ", description=" + description +
                 ", amount=" + amount +
-                ", paymentDate=" + paymentDate.getDayOfMonth() + "-" + paymentDate.getMonth() + "-" + paymentDate.getYear() +
+                ", paymentDate=" + paymentDate.getDayOfMonth() + "-" + paymentDate.getMonth() + "-" + paymentDate.getYear() + " " + paymentDate.getHour()+":"+ paymentDate.getMinute() +
                 ", student=" + student +
                 ", bill=" + bill +
                 '}';

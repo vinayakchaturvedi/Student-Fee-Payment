@@ -120,7 +120,7 @@ public class Bills implements Cloneable {
     public String toString() {
         return "Bills{" +
                 "id=" + id +
-                ", description='" + description +
+                ", description=" + description +
                 ", totalAmount=" + totalAmount +
                 ", paidAmount=" + paidAmount +
                 ", remainingAmount=" + remainingAmount +

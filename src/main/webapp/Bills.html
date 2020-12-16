@@ -11,25 +11,25 @@
 </head>
 <body>
 <div>
-<nav>
-    <img src="assets/images/iiitb-invert-logo.png" onclick="goToHome()" alt="">
-    <label class="logo"> IIIT - Bangalore</label>
-    <ul>
-        <li><a onclick="goToHome()" >Home</a></li>
-        <li><a onclick="gotoshowPayment()">Show Payments</a></li>
-        <li><a onclick="">Notification</a></li>
-        <li><a href="index.html" >Logout</a></li>
-    </ul>
-    <label id="icon">
-        <i class="fas fa-bars"></i>
-    </label>
-</nav>
+    <nav>
+        <img src="assets/images/iiitb-invert-logo.png" onclick="goToHome()" alt="">
+        <label class="logo"> IIIT - Bangalore</label>
+        <ul>
+            <li><a onclick="goToHome()">Home</a></li>
+            <li><a onclick="gotoshowPayment()">Show Payments</a></li>
+            <li><a onclick="">Notification</a></li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+        <label id="icon">
+            <i class="fas fa-bars"></i>
+        </label>
+    </nav>
 </div>
 <h1 id="welcomeMessage"></h1>
 <h2 id="rollNumber"></h2>
 <h2 id="heading"></h2>
 
-<table class="container" id="show-bills" >
+<table class="container" id="show-bills">
     <thead>
     <tr>
         <th><h1>Description</h1></th>
@@ -44,7 +44,9 @@
     <tbody id="bills">
     </tbody>
 </table>
+
 <div class="payment" id="payment" style="width:800px; margin:0 auto;">
+    0
     <div class="totalAmount">
         <label for="totalAmount">Total Amount</label>
         <input type="number" id="totalAmount" name="totalAmount" readonly> <br>
@@ -55,13 +57,4 @@
 </div>
 </body>
 <script src="assets/js/show-bills.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
-<script>
-    $(document).ready(function (){
-        $('#icon').click(function(){
-            $('ul').toggleClass('show');
-        });
-    });
-</script>
 </html>

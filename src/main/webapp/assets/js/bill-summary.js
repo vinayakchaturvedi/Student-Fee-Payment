@@ -2,6 +2,12 @@ let queryString = decodeURIComponent(window.location.search).substring(1);
 let dict = {}, userName, firstName;
 let promiseResponse = start();
 
+$(document).ready(function (){
+    $('#icon').click(function(){
+        $('ul').toggleClass('show');
+    });
+});
+
 async function start() {
     let queries = queryString.split('&');
     userName = queries[0].substring(9);
@@ -52,7 +58,7 @@ async function payment() {
     let result = await response;
     console.log(response)
 
-    document.getElementById("heading").a;
+    document.getElementById("heading").remove();
     document.getElementById("summaryTable").remove();
     document.getElementById("paymentButton").remove();
 
@@ -66,9 +72,6 @@ async function payment() {
 }
 
 async function goToHome() {
-    window.location.href = "Bills.html?" + queryString;
-}
-async function goToH() {
     let querystr = "userName=" + userName + "&name=" + firstName;
     window.location.href = "Bills.html?" + querystr;
 }

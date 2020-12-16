@@ -2,6 +2,13 @@ let queryString = decodeURIComponent(window.location.search).substring(1);
 let billsList = null, userName, firstName;
 let promiseResponse = start();
 
+
+$(document).ready(function (){
+    $('#icon').click(function(){
+        $('ul').toggleClass('show');
+    });
+});
+
 async function start() {
     let queries = queryString.split('&');
     userName = queries[0].substring(9);
