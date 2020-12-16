@@ -32,6 +32,39 @@ nav li{
     margin: 0 8px;
     line-height: 80px;
 }
+nav ul li{
+    background: #34495e;
+    position: relative;
+    list-style: none;
+    display: inline-block;
+}
+nav ul li a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    line-height: 60px;
+    font-size: 20px;
+}
+nav ul li a:hover{
+    background:#34495e;
+}
+nav ul ul{
+    position: center;
+    display: none;
+}
+nav ul li:hover > ul{
+    display: block;
+}
+nav ul ul li{
+    width: 150px;
+    float: none;
+    display: list-item;
+    position: relative;
+}
+.notify li a{
+    font-size: 12px;
+}
+
 nav a{
     color: #ffffff;
     font-size: 18px;
@@ -39,14 +72,14 @@ nav a{
     text-transform: uppercase;
     border: 1px solid transparent;
     padding: 7px 10px;
-    border-radius: 3px;
+    border-radius: 15px;
 }
 a.active,a:hover{
     border: 1px solid white;
     transition: .5s;
 
 }
-nav #icon{
+span{
     color: white;
     font-size: 30px;
     line-height: 80px;
@@ -68,7 +101,7 @@ nav #icon{
     }
 }
 @media(max-width:909px) {
-    nav #icon{
+    span{
         display: block;
     }
     nav ul{

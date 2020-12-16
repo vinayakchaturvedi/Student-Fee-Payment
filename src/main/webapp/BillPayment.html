@@ -15,23 +15,24 @@
         <img src="assets/images/iiitb-invert-logo.png" onclick="goToHome()" alt="">
         <label class="logo"> IIIT - Bangalore</label>
         <ul>
-            <li><a onclick="goToHome()" >Home</a></li>
+            <li><a onclick="goToHome()">Home</a></li>
             <li><a onclick="gotoshowPayment()">Show Payments</a></li>
-            <li><a onclick="">Notification</a>
+            <li><a onclick="functionNotify()">Alerts</a>
+                <ul class="notify" id="notification-drop" >
 
+                </ul>
             </li>
-            <li><a href="index.html" >Logout</a></li>
+            <li><a href="index.html">Logout</a></li>
         </ul>
-        <label id="icon">
-            <i class="fas fa-bars"></i>
-        </label>
+        <span id="icon">
+                   </span>
     </nav>
 </div>
 <h1 id="welcomeMessage"></h1>
 <h2 id="rollNumber"></h2>
 <h2 id="heading"></h2>
 
-<table class="container" id="show-payments" >
+<table class="container" id="show-payments">
     <thead>
     <tr>
         <th><h1>Description</h1></th>

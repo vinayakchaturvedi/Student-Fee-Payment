@@ -70,7 +70,16 @@ async function payment() {
         '        <button class="btn paymentButton" type="submit" onclick="goToHome()">Home</button>\n' +
         '    </div>';
 }
-
+function functionNotify()
+{   let tableBody = document.getElementById('notification-drop');
+    tableBody.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+        tableBody.innerHTML += '<li><a>';
+        let temp = "";
+        temp += 'notification'+i;
+        tableBody.innerHTML += temp + '</a></li>';
+    }
+}
 async function goToHome() {
     let querystr = "userName=" + userName + "&name=" + firstName;
     window.location.href = "Bills.html?" + querystr;

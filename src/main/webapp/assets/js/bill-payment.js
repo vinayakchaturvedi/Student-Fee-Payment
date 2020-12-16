@@ -2,13 +2,6 @@ let queryString = decodeURIComponent(window.location.search).substring(1);
 let billsList = null, userName, firstName;
 let promiseResponse = start();
 
-
-$(document).ready(function (){
-    $('#icon').click(function(){
-        $('ul').toggleClass('show');
-    });
-});
-
 async function start() {
     let queries = queryString.split('&');
     userName = queries[0].substring(9);
@@ -48,7 +41,16 @@ async function start() {
         }
     }
 }
-
+function functionNotify()
+{   let tableBody = document.getElementById('notification-drop');
+    tableBody.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+        tableBody.innerHTML += '<li><a>';
+        let temp = "";
+        temp += 'notification'+i;
+        tableBody.innerHTML += temp + '</a></li>';
+     }
+   }
 async function gotoshowPayment() {
     window.location.href="BillPayment.html?"+queryString;
 }

@@ -3,11 +3,13 @@ let billsList = null, userName, firstName;
 let dict = {};
 let promiseResponse = start();
 
+/*
 $(document).ready(function () {
     $('#icon').click(function () {
         $('ul').toggleClass('show');
     });
 });
+*/
 
 async function start() {
     let queries = queryString.split('&');
@@ -80,6 +82,7 @@ function calculate() {
     finalSum = sum;
 }
 
+
 function payment() {
     if (finalSum === 0) {
         alert("Your Total Payment Amount is 0")
@@ -93,6 +96,31 @@ function payment() {
         window.location.href = "BillSummary.html" + queryString;
     }
 }
+function functionNotify()
+{   let tableBody = document.getElementById('notification-drop');
+    tableBody.innerHTML = "";
+    /*for (let i = 0; i < 3; i++) {
+        tableBody.innerHTML += '<li><a>';
+        let temp = "";
+        temp += 'notification'+i;
+        tableBody.innerHTML += temp + '</a></li>';
+    }*/
+    var date= new Date();
+    var today=date.getDate();
+    for (let i = 0; i < billsList.length; i++) {
+        tableBody.innerHTML += '<li><a>';
+        var day=parseInt((billsList[i].deadline).substring(0,2));
+        let temp = "";
+        console.log("Ajj ki date"+today)
+        console.log("Deadline"+day)
+        console.log("Difference"+(day-today))
+        if ((day-today)<5) {
+            temp += billsList[i].description+' Deadline overs in '+ (day-today) +' Days' ;
+        }
+        tableBody.innerHTML += temp + '</a></li>';
+    }
+}
+
 async function gotoshowPayment()
 {   window.location.href="BillPayment.html?"+queryString;
 }
