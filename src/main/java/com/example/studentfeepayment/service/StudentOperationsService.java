@@ -51,19 +51,19 @@ public class StudentOperationsService {
                 Constants.ZERO, Constants.REGISTRATION_FEE_VALUE, today, today.plusDays(3));
 
         Bills library = new Bills(Constants.LIBRARY_FEE, Constants.LIBRARY_FEE_VALUE,
-                Constants.ZERO, Constants.LIBRARY_FEE_VALUE, today, today.plusDays(5));
+                Constants.ZERO, Constants.LIBRARY_FEE_VALUE, today, today.plusDays(10));
 
         Bills tuition = new Bills(Constants.TUITION_FEE, Constants.TUITION_FEE_VALUE,
-                Constants.ZERO, Constants.TUITION_FEE_VALUE, today, today.plusDays(5));
+                Constants.ZERO, Constants.TUITION_FEE_VALUE, today, today.plusDays(7));
 
         Bills exam = new Bills(Constants.EXAM_FEE, Constants.EXAM_FEE_VALUE,
-                Constants.ZERO, Constants.EXAM_FEE_VALUE, today, today.plusDays(5));
+                Constants.ZERO, Constants.EXAM_FEE_VALUE, today, today.plusDays(15));
 
         Bills hostel = new Bills(Constants.HOSTEL_FEE, Constants.HOSTEL_FEE_VALUE,
-                Constants.ZERO, Constants.HOSTEL_FEE_VALUE, today, today.plusDays(5));
+                Constants.ZERO, Constants.HOSTEL_FEE_VALUE, today, today.plusDays(10));
 
         Bills mess = new Bills(Constants.MESS_FEE, Constants.MESS_FEE_VALUE,
-                Constants.ZERO, Constants.MESS_FEE_VALUE, today, today.plusDays(5));
+                Constants.ZERO, Constants.MESS_FEE_VALUE, today, today.plusDays(10));
 
         bills.add(registration);
         bills.add(library);
