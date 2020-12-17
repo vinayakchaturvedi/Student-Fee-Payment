@@ -13,6 +13,17 @@ async function start() {
     userName = queries[0].substring(9);
     firstName = queries[1].substring(5);
 
+    let response = await fetch('api/bills/show', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+            userName: userName
+        })
+    });
+    billsList = await response.json();
+
     for (let i = 2; i < queries.length; i++) {
         let key = queries[i].split('=')[0];
         dict[key] = queries[i].split('=')[1];
@@ -73,12 +84,24 @@ async function payment() {
 function functionNotify()
 {   let tableBody = document.getElementById('notification-drop');
     tableBody.innerHTML = "";
-    for (let i = 0; i < 3; i++) {
+    var date= new Date();
+    var today=date.getDate();
+    if (billsList.length === 0) {
         tableBody.innerHTML += '<li><a>';
         let temp = "";
-        temp += 'notification'+i;
+        temp += 'All bills are PAID' ;
         tableBody.innerHTML += temp + '</a></li>';
     }
+    else
+    {for (let i = 0; i < billsList.length; i++) {
+        tableBody.innerHTML += '<li><a>';
+        var day=parseInt((billsList[i].deadline).substring(0,2));
+        let temp = "";
+        if ((day-today)<5) {
+            temp += billsList[i].description+' Deadline overs in '+ (day-today) +' Days' ;
+        }
+        tableBody.innerHTML += temp + '</a></li>';
+    } }
 }
 async function goToHome() {
     let querystr = "userName=" + userName + "&name=" + firstName;
