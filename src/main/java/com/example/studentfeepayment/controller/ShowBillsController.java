@@ -18,6 +18,12 @@ import java.util.List;
 @Path("bills")
 public class ShowBillsController {
 
+    /**
+     * @param request -- Student Object
+     * @return
+     * @throws URISyntaxException
+     * @throws JsonProcessingException
+     */
     @POST
     @Path("/show")
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,7 +52,7 @@ public class ShowBillsController {
     }
 
     /**
-     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak&Registration Fees=500&Library Fees=1000"}
+     * @param request -- Student Object
      * @return
      * @throws URISyntaxException
      * @throws JsonProcessingException

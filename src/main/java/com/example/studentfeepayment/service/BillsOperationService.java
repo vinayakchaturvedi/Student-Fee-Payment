@@ -35,7 +35,7 @@ public class BillsOperationService {
     }
 
     /**
-     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak"}
+     * @param request -- {"queryString":"userName=MT2020001&name=Vinayak&Registration Fees=500&Library Fees=1000"}
      * @return
      */
     public boolean payBills(String request) {
