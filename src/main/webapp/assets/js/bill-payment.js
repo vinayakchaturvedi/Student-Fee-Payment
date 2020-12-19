@@ -1,6 +1,7 @@
 let queryString = decodeURIComponent(window.location.search).substring(1);
-let billsList = null,billsList_alert = null, userName, firstName;
+let billsList = null, billsList_alert = null, userName, firstName;
 let promiseResponse = start();
+let counter = 0;
 
 async function start() {
     let queries = queryString.split('&');
@@ -10,6 +11,7 @@ async function start() {
 
     document.getElementById("welcomeMessage").innerHTML = "Welcome " + firstName + " To IIIT Bangalore";
     document.getElementById("rollNumber").innerHTML = "Your Roll Number & User Name is " + userName;
+
     let response2 = await fetch('api/bills/show', {
         method: 'POST',
         headers: {
@@ -21,6 +23,42 @@ async function start() {
     });
 
     billsList_alert = await response2.json();
+
+    let table = document.getElementById('notification-drop');
+    let today = new Date();
+    table.innerHTML = "";
+    table.innerHTML += '<li><a>';
+
+    if (billsList_alert.length === 0) {
+        let temp = "";
+        temp += 'All bills are paid.';
+        table.innerHTML += temp + '</a></li>';
+    } else {
+
+        for (let i = 0; i < billsList_alert.length; i++) {
+            let billdate = new Date((billsList_alert[i].deadline));
+            let diff = billdate.getTime() - today.getTime();
+            let msInDay = 1000 * 3600 * 24;
+            let remain = Math.ceil(diff / msInDay)
+            if (remain < 5) {
+                let temp = "";
+                temp += billsList_alert[i].description + ' Deadline overs in ' + remain + ' Days';
+                table.innerHTML += temp + '</a></li>';
+                counter++;
+            }
+        }
+        if (counter === 0) {
+            let temp = "";
+            temp += "None  of the bill's deadline overs in 5 days";
+            table.innerHTML += temp + '</a></li>';
+        }
+    }
+    let alertshow = document.getElementById('deadlineAlert');
+    if (counter === 0) {
+        alertshow.innerHTML = 'Alerts';
+    } else {
+        alertshow.innerHTML = 'Alerts (' + counter + ')';
+    }
 
     let response = await fetch('api/bills/paid', {
         method: 'POST',
@@ -35,7 +73,7 @@ async function start() {
 
     billsList = await response.json();
     if (billsList.length === 0) {
-        document.getElementById('heading').innerHTML = "You didn't paid any of the bills";
+        document.getElementById('heading').innerHTML = "You have not paid any of yours bills yet !!";
         document.getElementById('show-payments').remove();
 
     } else {
@@ -52,31 +90,14 @@ async function start() {
         }
     }
 }
-function functionNotify()
-{   let tableBody = document.getElementById('notification-drop');
-    tableBody.innerHTML = "";
-    var date= new Date();
-    var today=date.getDate();
-    if (billsList_alert.length === 0) {
-        tableBody.innerHTML += '<li><a>';
-        let temp = "";
-        temp += 'All bills are PAID' ;
-        tableBody.innerHTML += temp + '</a></li>';
-    }
-    else
-    {for (let i = 0; i < billsList_alert.length; i++) {
-        tableBody.innerHTML += '<li><a>';
-        var day=parseInt((billsList_alert[i].deadline).substring(0,2));
-        let temp = "";
-        if ((day-today)<5) {
-            temp += billsList_alert[i].description+' Deadline overs in '+ (day-today) +' Days' ;
-        }
-        tableBody.innerHTML += temp + '</a></li>';
-        }
-    }
+
+function functionNotify() {
+    let alertshow = document.getElementById('deadlineAlert');
+    alertshow.innerHTML = 'Alerts';
 }
+
 async function gotoshowPayment() {
-    window.location.href="BillPayment.html?"+queryString;
+    window.location.href = "BillPayment.html?" + queryString;
 }
 
 async function goToHome() {

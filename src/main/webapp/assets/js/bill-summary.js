@@ -1,12 +1,13 @@
 let queryString = decodeURIComponent(window.location.search).substring(1);
 let dict = {}, userName, firstName;
 let promiseResponse = start();
+let counter=0;
 
-$(document).ready(function (){
+/*$(document).ready(function (){
     $('#icon').click(function(){
         $('ul').toggleClass('show');
     });
-});
+});*/
 
 async function start() {
     let queries = queryString.split('&');
@@ -23,6 +24,42 @@ async function start() {
         })
     });
     billsList = await response.json();
+
+    let table = document.getElementById('notification-drop');
+    let today = new Date();
+    table.innerHTML = "";
+    table.innerHTML += '<li><a>';
+
+    if (billsList.length === 0) {
+        let temp = "";
+        temp += 'All bills are paid.';
+        table.innerHTML += temp + '</a></li>';
+    } else {
+
+        for (let i = 0; i < billsList.length; i++) {
+            let billdate = new Date((billsList[i].deadline));
+            let diff = billdate.getTime() - today.getTime();
+            let msInDay = 1000 * 3600 * 24;
+            let remain = Math.ceil(diff / msInDay)
+            if (remain < 5) {
+                let temp = "";
+                temp += billsList[i].description + ' Deadline overs in ' + remain + ' Days';
+                table.innerHTML += temp + '</a></li>';
+                counter++;
+            }
+        }
+        if(counter === 0)
+        {   let temp = "";
+            temp += "None  of the bill's deadline overs in 5 days";
+            table.innerHTML += temp + '</a></li>';
+        }
+    }
+    let alertshow = document.getElementById('deadlineAlert');
+    if (counter === 0) {
+        alertshow.innerHTML = 'Alerts';
+    } else {
+        alertshow.innerHTML = 'Alerts (' + counter + ')';
+    }
 
     for (let i = 2; i < queries.length; i++) {
         let key = queries[i].split('=')[0];
@@ -82,26 +119,8 @@ async function payment() {
         '    </div>';
 }
 function functionNotify()
-{   let tableBody = document.getElementById('notification-drop');
-    tableBody.innerHTML = "";
-    var date= new Date();
-    var today=date.getDate();
-    if (billsList.length === 0) {
-        tableBody.innerHTML += '<li><a>';
-        let temp = "";
-        temp += 'All bills are PAID' ;
-        tableBody.innerHTML += temp + '</a></li>';
-    }
-    else
-    {for (let i = 0; i < billsList.length; i++) {
-        tableBody.innerHTML += '<li><a>';
-        var day=parseInt((billsList[i].deadline).substring(0,2));
-        let temp = "";
-        if ((day-today)<5) {
-            temp += billsList[i].description+' Deadline overs in '+ (day-today) +' Days' ;
-        }
-        tableBody.innerHTML += temp + '</a></li>';
-    } }
+{   let alertshow = document.getElementById('deadlineAlert');
+    alertshow.innerHTML='Alerts';
 }
 async function goToHome() {
     let querystr = "userName=" + userName + "&name=" + firstName;
