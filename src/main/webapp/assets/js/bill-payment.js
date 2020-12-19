@@ -103,3 +103,11 @@ async function gotoshowPayment() {
 async function goToHome() {
     window.location.href = "Bills.html?" + queryString;
 }
+
+async function goToAbout() {
+    window.location.href = "about.html?" + queryString;
+}
+
+async function goToContactUs() {
+    window.location.href = "contactus.html?" + queryString;
+}

@@ -2,7 +2,7 @@ let queryString = decodeURIComponent(window.location.search).substring(1);
 let billsList = null, userName, firstName;
 let dict = {};
 let promiseResponse = start();
-let counter=0;
+let counter = 0;
 
 async function start() {
     let queries = queryString.split('&');
@@ -65,14 +65,14 @@ async function start() {
             let diff = billdate.getTime() - today.getTime();
             let msInDay = 1000 * 3600 * 24;
             let remain = Math.ceil(diff / msInDay)
-            if ( 0<remain && remain < 5 )  {
-                temp += '<a>'+billsList[i].description + ' Deadline overs in ' + remain + ' Days'+'</a>';
+            if (0 < remain && remain < 5) {
+                temp += '<a>' + billsList[i].description + ' Deadline overs in ' + remain + ' Days' + '</a>';
                 counter++;
             }
         }
         tableBody.innerHTML += temp + '</li>';
-        if(counter === 0)
-        {   let temp = "";
+        if (counter === 0) {
+            let temp = "";
             temp += "None  of the bill's deadline overs in 5 days";
             tableBody.innerHTML += temp + '</li>';
         }
@@ -128,7 +128,7 @@ function payment() {
 
 function functionNotify() {
     let alertshow = document.getElementById('deadlineAlert');
-    alertshow.innerHTML='Alerts';
+    alertshow.innerHTML = 'Alerts';
 }
 
 async function gotoshowPayment() {
@@ -137,4 +137,12 @@ async function gotoshowPayment() {
 
 async function goToHome() {
     window.location.href = "Bills.html?" + queryString;
+}
+
+async function goToAbout() {
+    window.location.href = "about.html?" + queryString;
+}
+
+async function goToContactUs() {
+    window.location.href = "contactus.html?" + queryString;
 }

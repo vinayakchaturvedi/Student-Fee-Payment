@@ -1,7 +1,7 @@
 let queryString = decodeURIComponent(window.location.search).substring(1);
 let dict = {}, userName, firstName;
 let promiseResponse = start();
-let counter=0;
+let counter = 0;
 
 async function start() {
     let queries = queryString.split('&');
@@ -42,8 +42,8 @@ async function start() {
                 counter++;
             }
         }
-        if(counter === 0)
-        {   let temp = "";
+        if (counter === 0) {
+            let temp = "";
             temp += "None  of the bill's deadline overs in 5 days";
             table.innerHTML += temp + '</a></li>';
         }
@@ -105,22 +105,32 @@ async function payment() {
     document.getElementById("paymentButton").remove();
 
 
-
     document.getElementById("paymentDone").innerHTML = "Thanks for paying you bills please click on the below button to redirect to your Home page";
     let Homebutton = document.getElementById('payment');
     Homebutton.innerHTML = '<div id="homeButton">\n' +
         '        <button class="btn paymentButton" type="submit" onclick="goToHome()">Home</button>\n' +
         '    </div>';
 }
-function functionNotify()
-{   let alertshow = document.getElementById('deadlineAlert');
-    alertshow.innerHTML='Alerts';
+
+function functionNotify() {
+    let alertshow = document.getElementById('deadlineAlert');
+    alertshow.innerHTML = 'Alerts';
 }
+
 async function goToHome() {
     let querystr = "userName=" + userName + "&name=" + firstName;
     window.location.href = "Bills.html?" + querystr;
 }
-async function gotoshowPayment()
-{   let querystr = "userName=" + userName + "&name=" + firstName;
-    window.location.href="BillPayment.html?"+querystr;
+
+async function gotoshowPayment() {
+    let querystr = "userName=" + userName + "&name=" + firstName;
+    window.location.href = "BillPayment.html?" + querystr;
+}
+
+async function goToAbout() {
+    window.location.href = "about.html?" + queryString;
+}
+
+async function goToContactUs() {
+    window.location.href = "contactus.html?" + queryString;
 }
