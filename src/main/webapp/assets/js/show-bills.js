@@ -2,6 +2,7 @@ let queryString = decodeURIComponent(window.location.search).substring(1);
 let billsList = null, userName, firstName;
 let dict = {};
 let promiseResponse = start();
+let counter=0;
 
 async function start() {
     let queries = queryString.split('&');
@@ -47,6 +48,42 @@ async function start() {
             tableBody.innerHTML += temp + '</tr>';
         }
     }
+
+    let tableBody = document.getElementById('notification-drop');
+    let today = new Date();
+    tableBody.innerHTML = "";
+    tableBody.innerHTML += '<li>';
+
+    if (billsList.length === 0) {
+        let temp = "";
+        temp += 'All bills are paid.';
+        tableBody.innerHTML += temp + '</li>';
+    } else {
+        let temp = "";
+        for (let i = 0; i < billsList.length; i++) {
+            let billdate = new Date((billsList[i].deadline));
+            let diff = billdate.getTime() - today.getTime();
+            let msInDay = 1000 * 3600 * 24;
+            let remain = Math.ceil(diff / msInDay)
+            if ( 0<remain && remain < 5 )  {
+                temp += '<a>'+billsList[i].description + ' Deadline overs in ' + remain + ' Days'+'</a>';
+                counter++;
+            }
+        }
+        tableBody.innerHTML += temp + '</li>';
+        if(counter === 0)
+        {   let temp = "";
+            temp += "None  of the bill's deadline overs in 5 days";
+            tableBody.innerHTML += temp + '</li>';
+        }
+    }
+    let alertshow = document.getElementById('deadlineAlert');
+    if (counter === 0) {
+        alertshow.innerHTML = 'Alerts';
+    } else {
+        alertshow.innerHTML = 'Alerts (' + counter + ')';
+    }
+
 }
 
 let finalSum = 0;
@@ -57,7 +94,7 @@ function calculate() {
             alert("Please enter the  value less then Remaining amount.")
             document.getElementById("payment" + i).value = 0;
         }
-        if((document.getElementById("payment" + i).value).startsWith("-")){
+        if ((document.getElementById("payment" + i).value).startsWith("-")) {
             alert("Please enter positive amount.")
             document.getElementById("payment" + i).value = 0;
         }
@@ -74,6 +111,7 @@ function calculate() {
     finalSum = sum;
 }
 
+
 function payment() {
     if (finalSum === 0) {
         alert("Your Total Payment Amount is 0")
@@ -86,4 +124,17 @@ function payment() {
         console.log("Query String: " + queryString);
         window.location.href = "BillSummary.html" + queryString;
     }
+}
+
+function functionNotify() {
+    let alertshow = document.getElementById('deadlineAlert');
+    alertshow.innerHTML='Alerts';
+}
+
+async function gotoshowPayment() {
+    window.location.href = "BillPayment.html?" + queryString;
+}
+
+async function goToHome() {
+    window.location.href = "Bills.html?" + queryString;
 }

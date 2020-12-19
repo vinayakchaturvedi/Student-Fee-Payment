@@ -14,12 +14,11 @@ body {
     color: #A7A1AE;
     background-color: #1F2739;
 }
-
 h1 {
     font-size: 3em;
     font-weight: 300;
-    line-height: 1em;
-    text-align: center;
+    line-height: 2em;
+    text-align:center;
     color: #4DC3FA;
     margin-top: 10px;
 }
@@ -135,7 +134,7 @@ h2 a {
 }
 
 .paymentButton {
-    margin-left: 1em;
+    margin-left: 2em;
     float: left;
     padding: 3px 15px;
     background-color: #57698e;

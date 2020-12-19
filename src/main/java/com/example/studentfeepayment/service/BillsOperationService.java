@@ -26,6 +26,14 @@ public class BillsOperationService {
         return bills;
     }
 
+    public List<StudentPayment> paidBills(Students student) {
+        StudentOperationsDAO sopDAO = new StudentOperationsDAO();
+        Students response = sopDAO.validateAndRetrieveStudent(student, false);
+        List<StudentPayment> bills = response.getStudentPaymentList();
+
+        return bills;
+    }
+
     /**
      * @param request -- {"queryString":"userName=MT2020001&name=Vinayak&Registration Fees=500&Library Fees=1000"}
      * @return

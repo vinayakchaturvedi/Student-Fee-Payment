@@ -7,12 +7,32 @@
     <title>Welcome to IIIT Bangalore</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/bills.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
-<h1 id="welcomeMessage"></h1>
-<h2 id="rollNumber"></h2>
-<h2 id="heading"></h2>
-
+<div>
+    <nav>
+        <img src="assets/images/iiitb-invert-logo.png" onclick="goToHome()" alt="">
+        <label class="logo"> IIIT - Bangalore</label>
+        <ul>
+            <li><a onclick="goToHome()">Home</a></li>
+            <li><a onclick="gotoshowPayment()">Show Payments</a></li>
+            <li><a onclick="functionNotify()" id="deadlineAlert">Alerts</a>
+                <ul class="notify" id="notification-drop">
+                </ul>
+            </li>
+            <li><a href="index.html">Logout</a></li>
+        </ul>
+        <label id="icon">
+            <i class="fas fa-bars"></i>
+        </label>
+    </nav>
+</div>
+<main class="container">
+    <h1 id="welcomeMessage"></h1>
+    <h2 id="rollNumber"></h2>
+    <h2 id="heading"></h2>
+</main>
 <table class="container" id="show-bills">
     <thead>
     <tr>
@@ -28,6 +48,7 @@
     <tbody id="bills">
     </tbody>
 </table>
+
 <div class="payment" id="payment" style="width:800px; margin:0 auto;">
     <div class="totalAmount">
         <label for="totalAmount">Total Amount</label>
@@ -37,6 +58,6 @@
         <button class="btn paymentButton" type="submit" onclick="payment()">Proceed to Payment</button>
     </div>
 </div>
-<script src="assets/js/show-bills.js"></script>
 </body>
+<script src="assets/js/show-bills.js"></script>
 </html>
