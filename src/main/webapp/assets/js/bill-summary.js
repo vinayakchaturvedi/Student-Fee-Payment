@@ -3,12 +3,6 @@ let dict = {}, userName, firstName;
 let promiseResponse = start();
 let counter=0;
 
-/*$(document).ready(function (){
-    $('#icon').click(function(){
-        $('ul').toggleClass('show');
-    });
-});*/
-
 async function start() {
     let queries = queryString.split('&');
     userName = queries[0].substring(9);
