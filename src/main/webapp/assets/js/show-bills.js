@@ -59,30 +59,29 @@ async function start() {
     let tableBody = document.getElementById('notification-drop');
     let today = new Date();
     tableBody.innerHTML = "";
-    tableBody.innerHTML += '<li><a>';
+    tableBody.innerHTML += '<li>';
 
     if (billsList.length === 0) {
         let temp = "";
         temp += 'All bills are paid.';
-        tableBody.innerHTML += temp + '</a></li>';
+        tableBody.innerHTML += temp + '</li>';
     } else {
-
+        let temp = "";
         for (let i = 0; i < billsList.length; i++) {
             let billdate = new Date((billsList[i].deadline));
             let diff = billdate.getTime() - today.getTime();
             let msInDay = 1000 * 3600 * 24;
             let remain = Math.ceil(diff / msInDay)
-            if (remain < 5) {
-                let temp = "";
-                temp += billsList[i].description + ' Deadline overs in ' + remain + ' Days';
-                tableBody.innerHTML += temp + '</a></li>';
+            if ( 0<remain && remain < 5 )  {
+                temp += '<a>'+billsList[i].description + ' Deadline overs in ' + remain + ' Days'+'</a>';
                 counter++;
             }
         }
+        tableBody.innerHTML += temp + '</li>';
         if(counter === 0)
         {   let temp = "";
             temp += "None  of the bill's deadline overs in 5 days";
-            tableBody.innerHTML += temp + '</a></li>';
+            tableBody.innerHTML += temp + '</li>';
         }
     }
     let alertshow = document.getElementById('deadlineAlert');
