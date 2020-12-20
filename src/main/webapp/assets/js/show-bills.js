@@ -67,11 +67,11 @@ async function start() {
             let remain = Math.ceil(diff / msInDay)
             if (remain < 5) {
                 if (remain === 0) {
-                    temp += '<a>' + billsList_alert[i].description + ' Deadline overs today' + '</a>';
+                    temp += '<a>' + billsList[i].description + ' Deadline overs today' + '</a>';
                 } else if (remain > 0) {
-                    temp += '<a>' + billsList_alert[i].description + ' Deadline overs in ' + remain + ' Days' + '</a>';
+                    temp += '<a>' + billsList[i].description + ' Deadline overs in ' + remain + ' Days' + '</a>';
                 } else {
-                    temp += '<a>' + billsList_alert[i].description + ' Deadline is Overdue' + '</a>';
+                    temp += '<a>' + billsList[i].description + ' Deadline is Overdue' + '</a>';
                 }
                 counter++;
             }
