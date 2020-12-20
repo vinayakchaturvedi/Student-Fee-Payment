@@ -35,11 +35,14 @@ async function start() {
             let diff = billdate.getTime() - today.getTime();
             let msInDay = 1000 * 3600 * 24;
             let remain = Math.ceil(diff / msInDay)
-            if ( remain === 0  && remain < 5 )  {
-                if( remain === 0)
-                {temp += '<a>'+billsList[i].description + ' Deadline overs today'+'</a>'; }
-                else
-                { temp += '<a>'+billsList[i].description + ' Deadline overs in ' + remain + ' Days'+'</a>'; }
+            if (remain < 5) {
+                if (remain === 0) {
+                    temp += '<a>' + billsList_alert[i].description + ' Deadline overs today' + '</a>';
+                } else if (remain > 0) {
+                    temp += '<a>' + billsList_alert[i].description + ' Deadline overs in ' + remain + ' Days' + '</a>';
+                } else {
+                    temp += '<a>' + billsList_alert[i].description + ' Deadline is Overdue' + '</a>';
+                }
                 counter++;
             }
         }
