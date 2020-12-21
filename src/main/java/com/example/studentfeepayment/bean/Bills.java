@@ -1,5 +1,6 @@
 package com.example.studentfeepayment.bean;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class Bills implements Cloneable {
         this.id = id;
     }
 
+    @JsonbTransient
     public List<Students> getStudents() {
         return students;
     }
@@ -108,6 +110,7 @@ public class Bills implements Cloneable {
         this.remainingAmount = remainingAmount;
     }
 
+    @JsonbTransient
     public List<StudentPayment> getBillPaymentList() {
         return billPaymentList;
     }
