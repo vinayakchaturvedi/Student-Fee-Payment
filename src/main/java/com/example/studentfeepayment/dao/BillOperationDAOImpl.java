@@ -11,10 +11,20 @@ import org.hibernate.query.Query;
 import java.util.List;
 import java.util.Map;
 
-public class BillPaymentDAO {
+public class BillOperationDAOImpl implements DAO{
+
+    @Override
+    public Session createSession() {
+        return SessionUtil.getSessionFactory().openSession();
+    }
+
+    @Override
+    public void terminateSession(Session session) {
+        session.close();
+    }
 
     public boolean payBill(Map<Integer, Integer> billToPay) {
-        Session session = SessionUtil.getSessionFactory().openSession();
+        Session session = createSession();
         Transaction transaction = session.beginTransaction();
         for (Map.Entry<Integer, Integer> entry : billToPay.entrySet()) {
             int idKey = entry.getKey();
@@ -34,12 +44,12 @@ public class BillPaymentDAO {
             System.out.println("Rows affected: " + result1 + ", " + result2);
         }
         transaction.commit();
-        session.close();
+        terminateSession(session);
         return true;
     }
 
     public boolean saveStudentPayment(StudentPayment studentPayment, Integer studentId, Integer billId) {
-        Session session = SessionUtil.getSessionFactory().openSession();
+        Session session = createSession();
         try {
             Transaction transaction = session.beginTransaction();
 
@@ -60,10 +70,10 @@ public class BillPaymentDAO {
             transaction.commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            session.close();
+            terminateSession(session);
             return false;
         } finally {
-            session.close();
+            terminateSession(session);
         }
 
         return true;

@@ -13,7 +13,17 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class StudentOperationsDAO {
+public class StudentOperationsDAOImpl implements DAO {
+
+    @Override
+    public Session createSession() {
+        return SessionUtil.getSessionFactory().openSession();
+    }
+
+    @Override
+    public void terminateSession(Session session) {
+        session.close();
+    }
 
     public boolean registerStudent(Students student) {
         Session session = SessionUtil.getSessionFactory().openSession();
@@ -28,10 +38,10 @@ public class StudentOperationsDAO {
             transaction.commit();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            session.close();
+            terminateSession(session);
             return false;
         } finally {
-            session.close();
+            terminateSession(session);
         }
         return true;
     }
@@ -55,11 +65,11 @@ public class StudentOperationsDAO {
             List<Students> students = query.getResultList();
 
             Students response = students.isEmpty() ? null : students.get(0).shallowCopy();
-            session.close();
+            terminateSession(session);
             return response;
 
         } catch (Exception ex) {
-            session.close();
+            terminateSession(session);
             System.out.println(ex.getMessage());
             return null;
         }
@@ -76,11 +86,11 @@ public class StudentOperationsDAO {
             Query<Long> query = session.createQuery(criteriaQuery);
             List<Long> ids = query.getResultList();
 
-            session.close();
+            terminateSession(session);
             return ids == null || ids.isEmpty() || ids.get(0) == null ? 0 : ids.get(0).intValue();
 
         } catch (Exception ex) {
-            session.close();
+            terminateSession(session);
             System.out.println(ex.getMessage());
             return 0;
         }

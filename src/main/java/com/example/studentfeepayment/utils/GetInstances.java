@@ -1,14 +1,14 @@
 package com.example.studentfeepayment.utils;
 
-import com.example.studentfeepayment.service.StudentOperationsService;
+import com.example.studentfeepayment.service.StudentOperationsServiceImpl;
 
 public class GetInstances {
-    private static StudentOperationsService studentOperationsService;
+    private static StudentOperationsServiceImpl studentOperationsServiceImpl;
 
-    public static StudentOperationsService getInstanceOfStudentOperationService() {
-        if (studentOperationsService != null) return studentOperationsService;
+    public static StudentOperationsServiceImpl getInstanceOfStudentOperationService() {
+        if (studentOperationsServiceImpl != null) return studentOperationsServiceImpl;
 
-        studentOperationsService = new StudentOperationsService();
-        return studentOperationsService;
+        studentOperationsServiceImpl = new StudentOperationsServiceImpl();
+        return studentOperationsServiceImpl;
     }
 }
